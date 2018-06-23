@@ -1,0 +1,17 @@
+﻿@model List<GroupListItemViewModel>
+@inject IJsonHelper Json;
+
+@{
+  ViewData["Title"] = "Index";
+}
+
+<h2>Groups</h2>
+
+<div id="react-groupList"></div>
+
+@section scripts {
+  <script type="text/javascript">
+    window.groupData = @Html.Raw(Json.Serialize(Model));
+    App.RenderGroupList(@Html.Raw(Json.Serialize(Model)));
+  </script>
+}

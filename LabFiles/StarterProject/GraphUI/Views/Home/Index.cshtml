@@ -1,0 +1,18 @@
+﻿@{
+  ViewData["Title"] = "Home Page";
+}
+
+    <div>
+      <h1>Smart UI with Microsoft Graph</h1>
+      <p>
+        This web application will demonstrate the pickers and cards available in Office UI Fabric and how they can be used to interact with data from the Microsoft Graph.
+      </p>
+      <p>
+        This app uses an <strong>incremental consent</strong> pattern to acquire the necessary permissions.  First, it asks the user for sign-in
+        permissions and to read the list of users in their company.  Then, when the user first attempts to read the list of groups in their company's
+        tenant, it requests the admin-restricted permissions from the tenant's administrator. 
+      </p>
+    </div>
+@section scripts {
+
+}
