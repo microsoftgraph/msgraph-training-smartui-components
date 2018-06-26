@@ -1,0 +1,67 @@
+﻿@using Microsoft.AspNetCore.Http.Extensions
+@{
+  ViewData["Title"] = "Pickers";
+}
+
+<h2>Pickers</h2>
+
+<div>
+  <h4>OneDrive Picker</h4>
+  <p>The OneDrive picker is a javascript control that provides for selecting a file/folder from the current user's OneDrive or OneDrive for Business.</p>
+  <div style="width: 25%">
+    <button onClick="launchOneDrivePicker()">Select from OneDrive</button>
+  </div>
+  <div>
+    <p>
+      Selected file:<br />
+      File name: <span id="selectedFileName">N/A</span><br />
+      Download url: <span id="selectedFileUrl">N/A</span>
+    </p>
+  </div>
+
+  <h4>People Picker</h4>
+  <p>The People Picker provides for selecting a user. The control has many callback functions, allowing the developer to fully customize the experience.</p>
+  <div style="width:25%">
+    <div id="react-peoplePicker"></div>
+  </div>
+</div>
+
+@section scripts {
+  <script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
+  <script type="text/javascript">
+
+    function launchOneDrivePicker() {
+      var ClientID = "df3cace8-af47-4d64-9539-8bafec3e92a2";
+
+      var odOptions = {
+        clientId: ClientID,
+        action: "query",
+        multiSelect: false,
+        advanced: {
+          queryParameters: "select=id,name,size,file,folder,photo,@@microsoft.graph.downloadUrl",
+          redirectUri: 'https://localhost:44313/OneDriveFilePickerCallback.html'
+        },
+        success: function (files) {
+          var data = files;
+          var fileName = data.value[0]["name"];
+          var filePath = data.value[0]["@@microsoft.graph.downloadUrl"];
+
+          document.getElementById('selectedFileName').innerHTML = '<strong>' + fileName + '</strong>';
+          document.getElementById('selectedFileUrl').innerText = filePath.substr(0, filePath.indexOf('tempauth') + 15) + '...';
+        },
+        cancel: function () {
+          /* cancel handler */
+        },
+        error: function (e) {
+          /* error handler */
+          alert(e);
+        }
+      };
+      OneDrive.open(odOptions);
+    }
+
+    // PeoplePicker code
+    App.RenderPeoplePicker();
+  </script>
+}
+
