@@ -61,11 +61,11 @@ To enable an application to call the Microsoft Graph, an application registratio
 1. Click **Add an app**
 1. Complete the **Register your application** section, entering an Application name. Clear the checkbox for Guided Setup. Click **Create**
 
-    ![Screenshot of Application Registration Portal page](./Images/Exercise1-01.png)
+    ![Screenshot of Application Registration Portal page](./images/Exercise1-01.png)
 
 1. On the registration page, in the **Application Secrets** section, click **Generate New Password**. Copy the generated password for future use.
 
-    ![Screenshot of Application Secrets section of the Application Registration Portal page](./Images/Exercise1-02.png)
+    ![Screenshot of Application Secrets section of the Application Registration Portal page](./images/Exercise1-02.png)
 
 1. On the registration page, in the **Platforms** section, click **Add Platform**.
 1. In the **Add Platform** dialog, click **Web**.
@@ -76,7 +76,7 @@ To enable an application to call the Microsoft Graph, an application registratio
 1. Click the **Add URL** button again.
 1. Enter a **Redirect URL** for the admin consent callback. For this lab, use the value `https://localhost:44313/Account/AADTenantConnected'
 
-    ![Screenshot of Platform section of the Application Registration Portal page](./Images/Exercise1-03.png)
+    ![Screenshot of Platform section of the Application Registration Portal page](./images/Exercise1-03.png)
 
 1. Click **Save**.
 1. Make note of the Application Id. This value is used in the authentication / token code.
@@ -91,7 +91,7 @@ To enable an application to call the Microsoft Graph, an application registratio
     1. **profile**
 1. Click **OK**.
 
-    ![Screenshot of Microsoft Graph Permissions section of the Application Registration Portal page](./Images/Exercise1-04.png)
+    ![Screenshot of Microsoft Graph Permissions section of the Application Registration Portal page](./images/Exercise1-04.png)
 
     1. Click **Save**.
 
@@ -127,7 +127,7 @@ The File picker requires a control for the user to invoke the picker, and a call
 1. In Solution Explorer, right-click on the **wwwroot** folder and choose **Add > New Item...**
 1. Select the **HTML Page** template. Name file `OneDriveFilePickerCallback.html`
 
-    ![Screenshot of Visual Studio solution explorer, highlighting the wwwroot folder](./Images/Exercise1-05.png)
+    ![Screenshot of Visual Studio solution explorer, highlighting the wwwroot folder](./images/Exercise1-05.png)
 
 1. Replace the contents of the file the following statements:
 
@@ -191,12 +191,12 @@ The File picker requires a control for the user to invoke the picker, and a call
 1. The File picker has a set of permissions that it requires. The app registration performed in this lab does not include those permissions, so you will need to log in and grant consent to your OneDrive for Business library.
 1. After consenting, the File picker renders in dialog window.
 
-    ![Screenshot of OneDrive File picker dialog](./Images/Exercise1-06.png)
+    ![Screenshot of OneDrive File picker dialog](./images/Exercise1-06.png)
 
 1. Select a file and click **Open**.
 1. The File picker will close the dialog and call the `success` callback, passing the requested information.
 
-    ![Screenshot of Picker page of the application, including data return from the OneDrive File Picker](./Images/Exercise1-07.png)
+    ![Screenshot of Picker page of the application, including data return from the OneDrive File Picker](./images/Exercise1-07.png)
 
 ### Add the Office UI Fabric People Picker
 
@@ -218,7 +218,7 @@ Office UI Fabric provides a People Picker component written in React. For detail
 
     > The `RenderPeoplePicker` method is defined in the `boot.tsx` file. The webpack configuration specifies that the TypeScript in the project is injected into pages as a library object named `App`.
 
-  ![Screenshot of Picker page with People Picker control](./Images/Exercise1-08.png)
+  ![Screenshot of Picker page with People Picker control](./images/Exercise1-08.png)
 
 <a name="exercise2"></a>
 
@@ -283,7 +283,7 @@ The application has a banner at the top of each page. In this step, add a Person
 
 1. Save all files and press F5 to run the project. After login, the home page will show the current user at the top right of the screen.
 
-  ![Screenshot of application home page with Persona card in banner](./Images/Exercise2-01.png)
+  ![Screenshot of application home page with Persona card in banner](./images/Exercise2-01.png)
 
 ### Add Cards to Groups detail component
 
@@ -291,7 +291,7 @@ The application has a page to display all Office 365 groups in the tenant. Selec
 
 1. With the project still running, click the **Groups** link in the left-hand navigation. From the list of Groups, click on a group to open the details pane.
 
-  ![Screenshot of the application Groups page with the detail pane displayed](./Images/Exercise2-02.png)
+  ![Screenshot of the application Groups page with the detail pane displayed](./images/Exercise2-02.png)
 
 In this step, add information about recent group activity using DocumentCards. The complete set of cards for the Group page can be found in the `LabFiles\Cards\GroupDetails.tsx` file.
 
@@ -362,7 +362,7 @@ In this step, add information about recent group activity using DocumentCards. T
 1. Save the file.
 1. Refresh the Groups page and click on a group. The detail panel will include details about the latest conversation.
 
-  ![Screenshot of the application group page with the detail pane open, showing the latest conversation](./Images/Exercise2-03.png)
+  ![Screenshot of the application group page with the detail pane open, showing the latest conversation](./images/Exercise2-03.png)
 
 1. Return to Visual Studio. In the `GroupDetails` class, create the following method to render the most-recently updated documents in the Group library.
 
@@ -465,7 +465,7 @@ In this step, add information about recent group activity using DocumentCards. T
 1. Save the file.
 1. Refresh the Groups page and click on a group. The detail panel will include details about the latest documents in the group library (if any).
 
-  ![Screenshot of the application group page with the detail pane open, showing the latest documents and the latest conversation](./Images/Exercise2-04.png)
+  ![Screenshot of the application group page with the detail pane open, showing the latest documents and the latest conversation](./images/Exercise2-04.png)
 
 <a name="exercise3"></a>
 
@@ -645,4 +645,4 @@ This exercise will use an Adaptive Card to render Group information.
 1. Save all files.
 1. Press F5 to run the application. Navigate to the Groups page and click on a group. The detail panel will include details about group in addition to the activity.
 
-  ![Screenshot of the application group page with the detail pane open, showing the group information](./Images/Exercise3-01.png)
+  ![Screenshot of the application group page with the detail pane open, showing the group information](./images/Exercise3-01.png)

@@ -173,4 +173,4 @@ This demo will use an Adaptive Card to render Group information.
 1. Save all files.
 1. Press F5 to run the application. Navigate to the Groups page and click on a group. The detail panel will include details about group in addition to the activity.
 
-  ![Screenshot of the application group page with the detail pane open, showing the group information](../../Images/Exercise3-01.png)
+  ![Screenshot of the application group page with the detail pane open, showing the group information](../../images/Exercise3-01.png)

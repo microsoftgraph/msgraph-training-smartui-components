@@ -59,7 +59,7 @@ The application has a banner at the top of each page. In this step, add a Person
 
 1. Save all files and press F5 to run the project. After login, the home page will show the current user at the top right of the screen.
 
-  ![Screenshot of application home page with Persona card in banner](../../Images/Exercise2-01.png)
+  ![Screenshot of application home page with Persona card in banner](../../images/Exercise2-01.png)
 
 ## Add Cards to Groups detail component
 
@@ -67,7 +67,7 @@ The application has a page to display all Office 365 groups in the tenant. Selec
 
 1. With the project still running, click the **Groups** link in the left-hand navigation. From the list of Groups, click on a group to open the details pane.
 
-  ![Screenshot of the application Groups page with the detail pane displayed](../../Images/Exercise2-02.png)
+  ![Screenshot of the application Groups page with the detail pane displayed](../../images/Exercise2-02.png)
 
 In this step, add information about recent group activity using DocumentCards. The complete set of cards for the Group page can be found in the `LabFiles\Cards\GroupDetails.tsx` file.
 
@@ -138,7 +138,7 @@ In this step, add information about recent group activity using DocumentCards. T
 1. Save the file.
 1. Refresh the Groups page and click on a group. The detail panel will include details about the latest conversation.
 
-  ![Screenshot of the application group page with the detail pane open, showing the latest conversation](../../Images/Exercise2-03.png)
+  ![Screenshot of the application group page with the detail pane open, showing the latest conversation](../../images/Exercise2-03.png)
 
 1. Return to Visual Studio. In the `GroupDetails` class, create the following method to render the most-recently updated documents in the Group library.
 
@@ -241,4 +241,4 @@ In this step, add information about recent group activity using DocumentCards. T
 1. Save the file.
 1. Refresh the Groups page and click on a group. The detail panel will include details about the latest documents in the group library (if any).
 
-  ![Screenshot of the application group page with the detail pane open, showing the latest documents and the latest conversation](../../Images/Exercise2-04.png)
+  ![Screenshot of the application group page with the detail pane open, showing the latest documents and the latest conversation](../../images/Exercise2-04.png)
