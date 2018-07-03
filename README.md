@@ -14,6 +14,10 @@ In this lab, you will walk through building a web user interface with Office UI 
 * [Interact with the Microsoft Graph using Cards](./Demos/02-cards)
 * [Interact with the Microsoft Graph using Adaptive Cards](./Demos/03-adaptive-cards)
 
+## Watch the Module
+
+This module has been recorded and is available in the Office Development YouTube channel: [Smart UI with Microsoft Graph, Pickers and Cards](https://youtu.be/RaaVGXvz2lc)
+
 ## Contributors
 
 |        Roles         |                        Author(s)                        |
@@ -25,6 +29,7 @@ In this lab, you will walk through building a web user interface with Office UI 
 
 | Version |     Date      |       Comments       |
 | ------- | ------------- | -------------------- |
+| 1.1     | July 3, 2018  | Screencast added     |
 | 1.0     | June 26, 2018 | New module submitted |
 
 ## Disclaimer
