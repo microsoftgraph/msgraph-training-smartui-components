@@ -2,7 +2,7 @@
 
 This demo will add various cards from Office UI Fabric to the application. The application reads Group information and should be run as the tenant administrator.
 
-### Add Persona card to banner
+## Add Persona card to banner
 
 The application has a banner at the top of each page. In this step, add a Persona card to the banner showing the current logged-in user. The complete `Banner` class can be found in the file `LabFiles\Cards\Banner.tsx` file.
 

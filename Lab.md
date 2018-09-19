@@ -4,9 +4,9 @@ In this lab, you will walk through building a web user interface with Office UI 
 
 ## In this lab
 
-1. [Using Office 365 Pickers](#exercise1)
-1. [Using Office UI Fabric Cards](#exercise2)
-1. [Render an Adaptive Card with data from Microsoft Graph](#exercise3)
+1. [Exercise 1: Using Office 365 Pickers](#exercise-1-using-office-365-pickers)
+1. [Exercise 2: Using Office UI Fabric Cards](#exercise-2-using-office-ui-fabric-cards)
+1. [Exercise 3: Render an Adaptive Card with data from Microsoft Graph](#exercise-3-using-adaptive-cards)
 
 ## Prerequisites
 
@@ -46,9 +46,7 @@ Install [NPM task runner](https://marketplace.visualstudio.com/items?itemName=Ma
 
 The application created in this lab requires the id of the tenant in which the application is registered. Use the support article [Find your Office 365 tenant ID](https://support.office.com/en-us/article/find-your-office-365-tenant-id-6891b561-a52d-4ade-9f39-b492285e2c9b) to obtain the id.
 
-<a name="exercise1"></a>
-
-## Exercise 1. Using Office 365 Pickers
+## Exercise 1: Using Office 365 Pickers
 
 In this exercise, you will extend an ASP.NET Core application to use pickers provided by Office 365 services.
 
@@ -56,7 +54,7 @@ In this exercise, you will extend an ASP.NET Core application to use pickers pro
 
 To enable an application to call the Microsoft Graph, an application registration is required. This lab uses the [Azure Active Directory v2.0 endpoint](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-compare).
 
-1. Open a browser to the url **https://apps.dev.microsoft.com**
+1. Open a browser to the url **<https://apps.dev.microsoft.com>**
 1. Log in with a Work or School account.
 1. Select **Add an app**
 1. Complete the **Register your application** section, entering an Application name. Clear the checkbox for Guided Setup. Select **Create**
@@ -72,9 +70,9 @@ To enable an application to call the Microsoft Graph, an application registratio
 1. Enter a **Redirect URL** to the callback page file. For this lab, use the value `https://localhost:44313/OneDriveFilePickerCallback.html`
 
 1. Select the **Add URL** button.
-1. Enter a **Redirect URL** for the implicit flow callback. For this lab, use the value `https://localhost:44313/signin-oidc'
+1. Enter a **Redirect URL** for the implicit flow callback. For this lab, use the value `https://localhost:44313/signin-oidc`
 1. Select the **Add URL** button again.
-1. Enter a **Redirect URL** for the admin consent callback. For this lab, use the value `https://localhost:44313/Account/Azure ADTenantConnected'
+1. Enter a **Redirect URL** for the admin consent callback. For this lab, use the value `https://localhost:44313/Account/Azure ADTenantConnected`
 
     ![Screenshot of Platform section of the Application Registration Portal page](./images/Exercise1-03.png)
 
@@ -220,9 +218,7 @@ Office UI Fabric provides a People Picker component written in React. For detail
 
     ![Screenshot of Picker page with People Picker control](./images/Exercise1-08.png)
 
-<a name="exercise2"></a>
-
-## Exercise 2. Using Office UI Fabric Cards
+## Exercise 2: Using Office UI Fabric Cards
 
 This exercise will add various cards from Office UI Fabric to the application. The application reads Group information and should be run as the tenant administrator.
 
@@ -467,9 +463,7 @@ In this step, add information about recent group activity using DocumentCards. T
 
     ![Screenshot of the application group page with the detail pane open, showing the latest documents and the latest conversation](./images/Exercise2-04.png)
 
-<a name="exercise3"></a>
-
-## Exercise 3.  Using Adaptive Cards
+## Exercise 3: Using Adaptive Cards
 
 This exercise will use an Adaptive Card to render Group information.
 

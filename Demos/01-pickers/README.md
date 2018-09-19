@@ -2,11 +2,11 @@
 
 In this demo, you will extend an ASP.NET Core application to use pickers provided by Office 365 services.
 
-### Register an application in Azure AD
+## Register an application in Azure AD
 
 To enable an application to call the Microsoft Graph, an application registration is required. This lab uses the [Azure Active Directory v2.0 endpoint](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-compare).
 
-1. Open a browser to the url **https://apps.dev.microsoft.com**
+1. Open a browser to the url **<https://apps.dev.microsoft.com>**
 1. Log in with a Work or School account.
 1. Select **Add an app**
 1. Complete the **Register your application** section, entering an Application name. Clear the checkbox for Guided Setup. Select **Create**
@@ -22,9 +22,9 @@ To enable an application to call the Microsoft Graph, an application registratio
 1. Enter a **Redirect URL** to the callback page file. For this lab, use the value `https://localhost:44313/OneDriveFilePickerCallback.html`
 
 1. Select the **Add URL** button.
-1. Enter a **Redirect URL** for the implicit flow callback. For this lab, use the value `https://localhost:44313/signin-oidc'
+1. Enter a **Redirect URL** for the implicit flow callback. For this lab, use the value `https://localhost:44313/signin-oidc`
 1. Select the **Add URL** button again.
-1. Enter a **Redirect URL** for the admin consent callback. For this lab, use the value `https://localhost:44313/Account/Azure ADTenantConnected'
+1. Enter a **Redirect URL** for the admin consent callback. For this lab, use the value `https://localhost:44313/Account/Azure ADTenantConnected`
 
     ![Screenshot of Platform section of the Application Registration Portal page](../../images/Exercise1-03.png)
 
