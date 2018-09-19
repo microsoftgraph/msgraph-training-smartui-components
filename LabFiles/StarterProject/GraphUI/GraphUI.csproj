@@ -9,9 +9,21 @@
 
   <ItemGroup>
     <Compile Remove="Components\Group\**" />
+    <Compile Remove="wwwroot\images\**" />
+    <Compile Remove="wwwroot\js\**" />
     <Content Remove="Components\Group\**" />
+    <Content Remove="wwwroot\images\**" />
+    <Content Remove="wwwroot\js\**" />
     <EmbeddedResource Remove="Components\Group\**" />
+    <EmbeddedResource Remove="wwwroot\images\**" />
+    <EmbeddedResource Remove="wwwroot\js\**" />
     <None Remove="Components\Group\**" />
+    <None Remove="wwwroot\images\**" />
+    <None Remove="wwwroot\js\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="wwwroot\favicon.ico" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,7 +31,6 @@
     <None Remove="Components\CommandBarTest.tsx" />
     <None Remove="Components\GroupCard.tsx" />
     <None Remove="Components\GroupCardExampleData.tsx" />
-    <None Remove="Components\PeoplePicker.tsx" />
   </ItemGroup>
 
 
@@ -38,13 +49,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\images\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <TypeScriptCompile Include="Components\GroupCard.tsx" />
     <TypeScriptCompile Include="Components\GroupCardExampleData.tsx" />
-    <TypeScriptCompile Include="Components\PeoplePicker.tsx" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

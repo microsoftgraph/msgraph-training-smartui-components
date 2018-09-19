@@ -45,6 +45,8 @@ namespace GroupsReact.Helpers
           case "TokenNotFound":
             await httpContext.ChallengeAsync();
             return JsonConvert.SerializeObject(new { e.Error.Message }, Formatting.Indented);
+          case "Authorization_RequestDenied":
+            throw;
           default:
             return JsonConvert.SerializeObject(new { Message = "An unknown error has occurred." }, Formatting.Indented);
         }
@@ -265,17 +267,31 @@ namespace GroupsReact.Helpers
     public static async Task<Drive> GetGroupDriveAsync(GraphServiceClient graphClient, string groupId)
     {
       if (groupId == null) throw new Exception("GroupIdIsNull");
-      var result = await graphClient.Groups[groupId].Drive.Request().GetAsync();
-      return result;
+      try
+      {
+        var result = await graphClient.Groups[groupId].Drive.Request().GetAsync();
+        return result;
+      }
+      catch (Exception ex)
+      {
+        return null;
+      }
     }
 
     public static async Task<List<DriveItem>> GetDriveRecentItemsAsync(GraphServiceClient graphClient, string driveId)
     {
-      var itemRequest = await graphClient.Drives[driveId].Root.Children.Request().GetAsync();
-      var items = itemRequest.CurrentPage as List<DriveItem>;
+      try
+      {
+        var itemRequest = await graphClient.Drives[driveId].Root.Children.Request().GetAsync();
+        var items = itemRequest.CurrentPage as List<DriveItem>;
 
-      var result = items.OrderByDescending(i => i.LastModifiedDateTime).Take(3).ToList();
-      return result;
+        var result = items.OrderByDescending(i => i.LastModifiedDateTime).Take(3).ToList();
+        return result;
+      }
+      catch (Exception ex)
+      {
+        return null;
+      }
     }
 
     internal static async Task<string> GetDriveItemThumbnail(GraphServiceClient graphClient, string driveId, string driveItemId)
@@ -287,9 +303,16 @@ namespace GroupsReact.Helpers
     internal static async Task<Conversation> GetGroupLatestConversationAsync(GraphServiceClient graphClient, string groupId)
     {
       if (groupId == null) throw new Exception("GroupIdIsNull");
-      var conversationRequest = await graphClient.Groups[groupId].Conversations.Request().GetAsync();
-      var conversations = conversationRequest.CurrentPage as List<Conversation>;
-      return conversations.OrderByDescending(c=>c.LastDeliveredDateTime).FirstOrDefault();
+      try
+      {
+        var conversationRequest = await graphClient.Groups[groupId].Conversations.Request().GetAsync();
+        var conversations = conversationRequest.CurrentPage as List<Conversation>;
+        return conversations.OrderByDescending(c => c.LastDeliveredDateTime).FirstOrDefault();
+      }
+      catch (Exception ex)
+      {
+        return null;
+      }
     }
 
     // Send an email message from the current user.

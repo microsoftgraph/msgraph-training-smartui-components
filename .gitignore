@@ -348,3 +348,4 @@ typings/
 **.DS_Store
 
 .vscode/
+.vs/

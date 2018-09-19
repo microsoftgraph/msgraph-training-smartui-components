@@ -29,18 +29,15 @@ export function renderNavMenu() {
 }
 
 export function RenderGroupList() {
-  ReactDOM.render(
-    <GroupList></GroupList>,
-    document.getElementById('react-groupList')
-  );
+    //Group list render function goes here
+    ReactDOM.render(
+        <GroupList></GroupList>,
+        document.getElementById('react-groupList')
+    );
 }
 
 export function RenderPeoplePicker() {
-  ReactDOM.render(
-    <PeoplePicker></PeoplePicker>,
-    document.getElementById('react-peoplePicker')
-  );
-
+    //People picker render function goes here
 }
 
 // Allow Hot Module Replacement

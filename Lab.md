@@ -67,12 +67,12 @@ To enable an application to call the Microsoft Graph, an application registratio
 
 1. On the registration page, in the **Platforms** section, select **Add Platform**.
 1. In the **Add Platform** dialog, select **Web**.
-1. Enter a **Redirect URL** to the callback page file. For this lab, use the value `https://localhost:44313/OneDriveFilePickerCallback.html`
+1. Enter a **Redirect URL** to the callback page file. For this lab, use the value `https://localhost:44396/OneDriveFilePickerCallback.html`
 
 1. Select the **Add URL** button.
-1. Enter a **Redirect URL** for the implicit flow callback. For this lab, use the value `https://localhost:44313/signin-oidc`
+1. Enter a **Redirect URL** for the implicit flow callback. For this lab, use the value `https://localhost:44396/signin-oidc`
 1. Select the **Add URL** button again.
-1. Enter a **Redirect URL** for the admin consent callback. For this lab, use the value `https://localhost:44313/Account/Azure ADTenantConnected`
+1. Enter a **Redirect URL** for the admin consent callback. For this lab, use the value `https://localhost:44396/Account/AADTenantConnected`
 
     ![Screenshot of Platform section of the Application Registration Portal page](./images/Exercise1-03.png)
 
@@ -139,7 +139,7 @@ The File picker requires a control for the user to invoke the picker, and a call
 1. Save and close the file.
 1. Open the file `Views\Picker\Index.cshtml`
 1. Notice that line 12 contains a button with a JavaScript handler for the select event.
-1. At the bottom of the page, at line 29, is a Razor section named **scripts**. Add the following tag inside the **scripts** section to load the File picker control.
+1. At the bottom of the page, approx line 33, is a Razor section named **scripts**. Add the following tag inside the **scripts** section to load the File picker control.
 
     ```javascript
     <script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
@@ -147,12 +147,10 @@ The File picker requires a control for the user to invoke the picker, and a call
 
 1. Add the following code after the `OneDrive.js` script tag. (The code is available in the `LabFiles\Pickers\OneDriveFilePicker.js` file):
 
-    > **NOTE:** In the script, there is a token called [your-client-id]. Replace this token with the client id of the application registered during the setup of this lab. This is the same id as used in the `appSettings.json` file.
-
     ```javascript
     <script type="text/javascript">
       function launchOneDrivePicker() {
-        var ClientID = "[your-client-id]";
+        var ClientID = "@Options.Value.ClientId";
 
         var odOptions = {
           clientId: ClientID,
@@ -160,7 +158,7 @@ The File picker requires a control for the user to invoke the picker, and a call
           multiSelect: false,
           advanced: {
             queryParameters: "select=id,name,size,file,folder,photo,@@microsoft.graph.downloadUrl",
-            redirectUri: 'https://localhost:44313/OneDriveFilePickerCallback.html'
+            redirectUri: '@Options.Value.BaseUrl/OneDriveFilePickerCallback.html'
           },
           success: function (files) {
             var data = files;
@@ -208,13 +206,21 @@ Office UI Fabric provides a People Picker component written in React. For detail
 1. Replace the contents of the template with the code from the file `LabFiles\Pickers\PeoplePicker.tsx`.
 1. Open the file `Views\Picker\Index.cshtml`
 1. Notice that line 25 contains a div with the id `react-peoplePicker`. This is the location in the page in which the control will be rendered.
-1. Inside the **scripts** section, add the following line:
+1. Inside the **scripts** section, add the following line right before the `</script>` tag:
 
     ```javascript
     App.RenderPeoplePicker();
     ```
+1. The `RenderPeoplePicker` method is defined in the `boot.tsx` file. Add the following code to that method:
 
-    > The `RenderPeoplePicker` method is defined in the `boot.tsx` file. The webpack configuration specifies that the TypeScript in the project is injected into pages as a library object named `App`.
+    ```javascript
+    ReactDOM.render(
+      <PeoplePicker></PeoplePicker>,
+      document.getElementById('react-peoplePicker')
+    );
+    ```
+
+    >Note: The webpack configuration specifies that the TypeScript in the project is injected into pages as a library object named `App`.
 
     ![Screenshot of Picker page with People Picker control](./images/Exercise1-08.png)
 
@@ -318,7 +324,7 @@ In this step, add information about recent group activity using DocumentCards. T
 
 1. In the `GroupDetails` class, create the following method to render the most-recent conversation using a DocumentCard.
 
-    ```typescript
+    ```tsx
     private getMailboxActivity(latestConversation: Conversation, mailboxWebUrl: string): JSX.Element {
       let mailboxActivity = null;
       if (latestConversation) {
@@ -346,7 +352,7 @@ In this step, add information about recent group activity using DocumentCards. T
 
 1. In the `render` method of the `GroupDetails` class, replace the `return` statement with the following:
 
-    ```typescript
+    ```tsx
     return (
       <div>
         <h2>{group.name}</h2>
@@ -362,7 +368,7 @@ In this step, add information about recent group activity using DocumentCards. T
 
 1. Return to Visual Studio. In the `GroupDetails` class, create the following method to render the most-recently updated documents in the Group library.
 
-    ```typescript
+    ```tsx
     private getLibraryActivity(driveRecentItems: DriveItem[], driveWebUrl: string): JSX.Element {
       if (driveRecentItems == null || driveRecentItems.length == 0) {
         return null;
@@ -433,7 +439,7 @@ In this step, add information about recent group activity using DocumentCards. T
 
 1. Replace the `render` method with the following.
 
-    ```typescript
+    ```tsx
     public render() {
       const group = this.props.group;
 
@@ -475,94 +481,113 @@ This exercise will use an Adaptive Card to render Group information.
     ```csharp
     private AdaptiveCard CreateGroupCard(Models.GroupModel group)
     {
-      AdaptiveCard groupCard = new AdaptiveCard()
-      {
-        Type = "AdaptiveCard",
-        Version = "1.0"
-      };
-
-      AdaptiveContainer infoContainer = new AdaptiveContainer();
-      AdaptiveColumnSet infoColSet = new AdaptiveColumnSet();
-
-      bool noPic = String.IsNullOrEmpty(group.Thumbnail);
-
-      if (!noPic)
-      {
-        AdaptiveColumn picCol = new AdaptiveColumn() { Width = AdaptiveColumnWidth.Auto };
-        picCol.Items.Add(new AdaptiveImage() { Url = new Uri(group.Thumbnail), Size = AdaptiveImageSize.Small, Style = AdaptiveImageStyle.Default });
-        infoColSet.Columns.Add(picCol);
-      }
-
-      AdaptiveColumn txtCol = new AdaptiveColumn() { Width = AdaptiveColumnWidth.Stretch };
-      var titleBlock = new AdaptiveTextBlock() { Text = NullSafeString(group.Name), Weight = AdaptiveTextWeight.Bolder };
-      if (noPic) { titleBlock.Size = AdaptiveTextSize.Large; }
-      txtCol.Items.Add(titleBlock);
-
-      txtCol.Items.Add(new AdaptiveTextBlock() { Text = NullSafeString(group.Description), Spacing = AdaptiveSpacing.None, IsSubtle = true });
-      infoColSet.Columns.Add(txtCol);
-      infoContainer.Items.Add(infoColSet);
-
-      groupCard.Body.Add(infoContainer);
-
-      AdaptiveContainer factContainer = new AdaptiveContainer();
-      AdaptiveFactSet factSet = new AdaptiveFactSet();
-
-      if (!String.IsNullOrEmpty(group.Classification))
-      {
-        factSet.Facts.Add(new AdaptiveFact()
+        AdaptiveCard groupCard = new AdaptiveCard()
         {
-          Title = "Classification",
-          Value = group.Classification
-        });
-      }
-      if (!String.IsNullOrEmpty(group.Visibility))
-      {
-        factSet.Facts.Add(new AdaptiveFact()
+            Type = "AdaptiveCard",
+            Version = "1.0"
+        };
+
+        AdaptiveContainer infoContainer = new AdaptiveContainer();
+        AdaptiveColumnSet infoColSet = new AdaptiveColumnSet();
+
+        bool noPic = String.IsNullOrEmpty(group.Thumbnail);
+
+        if (!noPic)
         {
-          Title = "Visibility",
-          Value = group.Visibility
-        });
-      }
+            AdaptiveColumn picCol = new AdaptiveColumn() {Width = AdaptiveColumnWidth.Auto};
+            picCol.Items.Add(new AdaptiveImage()
+            {
+                Url = new Uri(group.Thumbnail),
+                Size = AdaptiveImageSize.Small,
+                Style = AdaptiveImageStyle.Default
+            });
+            infoColSet.Columns.Add(picCol);
+        }
 
-      if (!String.IsNullOrEmpty(group.GroupType))
-      {
-        factSet.Facts.Add(new AdaptiveFact()
+        AdaptiveColumn txtCol = new AdaptiveColumn() {Width = AdaptiveColumnWidth.Stretch};
+        var titleBlock =
+            new AdaptiveTextBlock() {Text = NullSafeString(group.Name), Weight = AdaptiveTextWeight.Bolder};
+        if (noPic)
         {
-          Title = "Type",
-          Value = NullSafeString(group.GroupType)
-        });
-      }
+            titleBlock.Size = AdaptiveTextSize.Large;
+        }
 
-      if (group.CreatedDateTime.HasValue)
-      {
-        factSet.Facts.Add(new AdaptiveFact()
+        txtCol.Items.Add(titleBlock);
+
+        txtCol.Items.Add(new AdaptiveTextBlock()
         {
-          Title = "Created",
-          Value = $"{{{{DATE({group.CreatedDateTime.Value.UtcDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ")},SHORT)}}}}"
+            Text = NullSafeString(group.Description),
+            Spacing = AdaptiveSpacing.None,
+            IsSubtle = true
         });
+        infoColSet.Columns.Add(txtCol);
+        infoContainer.Items.Add(infoColSet);
 
-      }
+        groupCard.Body.Add(infoContainer);
 
-      if (!String.IsNullOrEmpty(group.Policy) && group.RenewedDateTime.HasValue)
-      {
+        AdaptiveContainer factContainer = new AdaptiveContainer();
+        AdaptiveFactSet factSet = new AdaptiveFactSet();
 
-        factSet.Facts.Add(new AdaptiveFact()
+        if (!String.IsNullOrEmpty(group.Classification))
         {
-          Title = "Policy",
-          Value = NullSafeString(group.Policy)
-        });
-        factSet.Facts.Add(new AdaptiveFact()
+            factSet.Facts.Add(new AdaptiveFact()
+            {
+                Title = "Classification",
+                Value = group.Classification
+            });
+        }
+
+        if (!String.IsNullOrEmpty(group.Visibility))
         {
-          Title = "Renewed",
-          Value = $"{{{{DATE({group.RenewedDateTime.Value.UtcDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ")},SHORT)}}}}"
-        });
-      }
+            factSet.Facts.Add(new AdaptiveFact()
+            {
+                Title = "Visibility",
+                Value = group.Visibility
+            });
+        }
 
-      factContainer.Items.Add(factSet);
-      groupCard.Body.Add(factContainer);
+        if (!String.IsNullOrEmpty(group.GroupType))
+        {
+            factSet.Facts.Add(new AdaptiveFact()
+            {
+                Title = "Type",
+                Value = NullSafeString(group.GroupType)
+            });
+        }
 
-      return groupCard;
+        if (group.CreatedDateTime.HasValue)
+        {
+            factSet.Facts.Add(new AdaptiveFact()
+            {
+                Title = "Created",
+                Value =
+                    $"{{{{DATE({group.CreatedDateTime.Value.UtcDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ")},SHORT)}}}}"
+            });
+
+        }
+
+        if (!String.IsNullOrEmpty(group.Policy) && group.RenewedDateTime.HasValue)
+        {
+
+            factSet.Facts.Add(new AdaptiveFact()
+            {
+                Title = "Policy",
+                Value = NullSafeString(group.Policy)
+            });
+            factSet.Facts.Add(new AdaptiveFact()
+            {
+                Title = "Renewed",
+                Value =
+                    $"{{{{DATE({group.RenewedDateTime.Value.UtcDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ")},SHORT)}}}}"
+            });
+        }
+
+        factContainer.Items.Add(factSet);
+        groupCard.Body.Add(factContainer);
+
+        return groupCard;
     }
+
     ```
 
 1. In Solution Explorer, right-select on the **Components** folder and choose **Add > New Item...**
@@ -572,7 +597,7 @@ This exercise will use an Adaptive Card to render Group information.
 1. Select the **TypeScript JSX File** template. Name file `GroupCard.tsx`.
 1. Replace the contents of the template with the following. (The complete code for the `GroupCard` class is in the file `LabFiles\Cards\Groups\GroupCard.tsx`.)
 
-    ```typescript
+    ```tsx
     import * as React from 'react';
     import * as AdaptiveCards from "adaptivecards";
     import { IGroupDetailsProps } from './GroupDetails';
@@ -623,7 +648,7 @@ This exercise will use an Adaptive Card to render Group information.
 
 1. In the `render` method, locate the `return` statement. Modify the return statement to include the **GroupCard**.
 
-    ```typescript
+    ```tsx
     return (
       <div>
         <h2>Group Information</h2>
