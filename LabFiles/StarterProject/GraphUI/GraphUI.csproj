@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>aspnet-GroupsReact-98A9B396-4950-4F30-8E90-F56B27B5FB35</UserSecretsId>
     <WebProject_DirectoryAccessLevelKey>0</WebProject_DirectoryAccessLevelKey>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
@@ -36,11 +36,11 @@
 
 
   <ItemGroup>
-    <PackageReference Include="AdaptiveCards" Version="1.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
-    <PackageReference Include="Microsoft.Graph" Version="1.8.1" />
-    <PackageReference Include="microsoft.identity.client" Version="1.1.0-preview" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
+    <PackageReference Include="AdaptiveCards" Version="1.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.4" />
+    <PackageReference Include="Microsoft.Graph" Version="1.11.0" />
+    <PackageReference Include="microsoft.identity.client" Version="1.1.4-preview0002" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.4" />
   </ItemGroup>
 
   <ItemGroup>
