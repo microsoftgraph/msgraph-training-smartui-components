@@ -1,8 +1,8 @@
 # Demo - Using Office UI Fabric Cards
 
-This demo will add various cards from Office UI Fabric to the application. The application reads Group information and should be run as the tenant administrator.
+This exercise will add various cards from Office UI Fabric to the application. The application reads Group information and should be run as the tenant administrator.
 
-### Add Persona card to banner
+## Add Persona card to banner
 
 The application has a banner at the top of each page. In this step, add a Persona card to the banner showing the current logged-in user. The complete `Banner` class can be found in the file `LabFiles\Cards\Banner.tsx` file.
 
@@ -98,7 +98,7 @@ In this step, add information about recent group activity using DocumentCards. T
 
 1. In the `GroupDetails` class, create the following method to render the most-recent conversation using a DocumentCard.
 
-    ```typescript
+    ```tsx
     private getMailboxActivity(latestConversation: Conversation, mailboxWebUrl: string): JSX.Element {
       let mailboxActivity = null;
       if (latestConversation) {
@@ -126,7 +126,7 @@ In this step, add information about recent group activity using DocumentCards. T
 
 1. In the `render` method of the `GroupDetails` class, replace the `return` statement with the following:
 
-    ```typescript
+    ```tsx
     return (
       <div>
         <h2>{group.name}</h2>
@@ -142,7 +142,7 @@ In this step, add information about recent group activity using DocumentCards. T
 
 1. Return to Visual Studio. In the `GroupDetails` class, create the following method to render the most-recently updated documents in the Group library.
 
-    ```typescript
+    ```tsx
     private getLibraryActivity(driveRecentItems: DriveItem[], driveWebUrl: string): JSX.Element {
       if (driveRecentItems == null || driveRecentItems.length == 0) {
         return null;
@@ -213,7 +213,7 @@ In this step, add information about recent group activity using DocumentCards. T
 
 1. Replace the `render` method with the following.
 
-    ```typescript
+    ```tsx
     public render() {
       const group = this.props.group;
 

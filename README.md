@@ -20,17 +20,19 @@ This module has been recorded and is available in the Office Development YouTube
 
 ## Contributors
 
-|        Roles         |                        Author(s)                        |
-| -------------------- | ------------------------------------------------------- |
-| Lab Manuals / Slides | Paul Schaeflein (Microsoft MVP) @paulschaeflein         |
-| Sponsor / Support    | Yina Arenas (Microsoft) @yinaa                          |
+|        Roles         |                            Author(s)                             |
+| -------------------- | ---------------------------------------------------------------- |
+| Lab Manuals / Slides | Paul Schaeflein (Microsoft MVP) @paulschaeflein                  |
+| QA                   | Julie Turner (Microsoft MVP, Sympraxis Consulting) @juliemturner |
+| Sponsor / Support    | Yina Arenas (Microsoft) @yina_arenas                             |
 
 ## Version history
 
-| Version |     Date      |       Comments       |
-| ------- | ------------- | -------------------- |
-| 1.1     | July 3, 2018  | Screencast added     |
-| 1.0     | June 26, 2018 | New module submitted |
+| Version |        Date        |        Comments        |
+| ------- | ------------------ | ---------------------- |
+| 1.2     | September 20, 2018 | 2019Q1 content refresh |
+| 1.1     | July 3, 2018       | Screencast added       |
+| 1.0     | June 26, 2018      | New module submitted   |
 
 ## Disclaimer
 

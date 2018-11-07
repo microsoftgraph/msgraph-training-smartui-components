@@ -33,11 +33,6 @@ namespace GroupsReact.Helpers
     public GraphAuthProvider(IMemoryCache memoryCache, IOptions<AzureAdOptions> options)  //IConfiguration configuration
     {
       var azureOptions = options.Value;
-
-      //var azureOptions = new AzureAdOptions();
-      //configuration.Bind("AzureAd", azureOptions);
-      //azureOptions.ClientSecret = configuration["ClientSecret"];
-
       _appId = azureOptions.ClientId;
       _credential = new ClientCredential(azureOptions.ClientSecret);
       _scopes = azureOptions.GraphScopes.Split(new[] { ' ' });

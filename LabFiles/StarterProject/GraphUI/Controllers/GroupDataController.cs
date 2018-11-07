@@ -46,96 +46,125 @@ namespace GroupsReact.Controllers
     }
 
 
-    [Route("Details")]
-    public async Task<ActionResult> Details(string id, string userId)
-    {
-      // Initialize the GraphServiceClient.
-      var graphClient = _graphSdkHelper.GetAuthenticatedClient(userId);
-
-      GroupModel details = null;
-      try
+      [Route("Details")]
+      public async Task<ActionResult> Details(string id, string userId)
       {
-        var group = await GraphService.GetGroupDetailsAsync(graphClient, id);
-        var pic = await GraphService.GetGroupPictureBase64(graphClient, id);
-        details = new GroupModel
-        {
-          Id = group.Id,
-          Classification = group.Classification,
-          CreatedDateTime = group.CreatedDateTime ?? null,
-          RenewedDateTime = group.RenewedDateTime ?? null,
-          Description = group.Description,
-          GroupType = String.Join(' ', group.GroupTypes),
-          Mail = group.Mail,
-          Name = group.DisplayName,
-          Visibility = group.Visibility,
-          Thumbnail = pic
-        };
+          // Initialize the GraphServiceClient.
+          var graphClient = _graphSdkHelper.GetAuthenticatedClient(userId);
 
-        if (details.GroupType == "Unified")
-        {
-          var policies = await GraphService.GetGroupPolicyAsync(graphClient, id);
-          var policy = policies.FirstOrDefault();
-          if (policy != null)
+          GroupModel details = null;
+          try
           {
-            details.Policy = $"{policy.GroupLifetimeInDays} Day expiration";
+              var group = await GraphService.GetGroupDetailsAsync(graphClient, id);
+              var pic = await GraphService.GetGroupPictureBase64(graphClient, id);
+              details = new GroupModel
+              {
+                  Id = group.Id,
+                  Classification = group.Classification,
+                  CreatedDateTime = group.CreatedDateTime ?? null,
+                  RenewedDateTime = group.RenewedDateTime ?? null,
+                  Description = group.Description,
+                  GroupType = String.Join(' ', group.GroupTypes),
+                  Mail = group.Mail,
+                  Name = group.DisplayName,
+                  Visibility = group.Visibility,
+                  Thumbnail = pic
+              };
+
+              if (details.GroupType == "Unified")
+              {
+                  try
+                  {
+                      var policies = await GraphService.GetGroupPolicyAsync(graphClient, id);
+                      var policy = policies.FirstOrDefault();
+                      if (policy != null)
+                      {
+                          details.Policy = $"{policy.GroupLifetimeInDays} Day expiration";
+                      }
+                  }
+                  catch (Exception ex)
+                  {
+                      details.Policy = "Not Applicable";
+                  }
+
+                  try
+                  {
+                      var drive = await GraphService.GetGroupDriveAsync(graphClient, id);
+                      if (drive != null)
+                      {
+                          details.DriveWebUrl = drive.WebUrl;
+                          var driveItems = await GraphService.GetDriveRecentItemsAsync(graphClient, drive.Id);
+
+                          if (driveItems.Count == 1)
+                          {
+                              var graphDriveItem = driveItems[0];
+                              var thumbnailUrl =
+                                  await GraphService.GetDriveItemThumbnail(graphClient, drive.Id, graphDriveItem.Id);
+                              var driveItem = new Models.DriveItem(graphDriveItem);
+                              driveItem.ThumbnailUrl = thumbnailUrl;
+                              details.DriveRecentItems.Add(driveItem);
+                          }
+
+                          if (driveItems.Count > 1)
+                          {
+                              foreach (var item in driveItems)
+                              {
+                                  details.DriveRecentItems.Add(new Models.DriveItem(item));
+                              }
+                          }
+                      }
+                  }
+                  catch (Exception ex)
+                  {
+                      details.DriveWebUrl = "Not Applicable";
+                  }
+
+                  try
+                  {
+                      var convo = await GraphService.GetGroupLatestConversationAsync(graphClient, id);
+                      if (convo != null)
+                      {
+                          details.LatestConversation = new Models.Conversation
+                          {
+                              Topic = convo.Topic,
+                              LastDeliveredDateTime = convo.LastDeliveredDateTime,
+                          };
+                          details.LatestConversation.UniqueSenders.AddRange(convo.UniqueSenders);
+                      }
+                  }
+                  catch (Exception ex)
+                  {
+                      //No chagne
+                  }
+              }
+
+              details.InfoCard = CreateGroupCard(details);
+          }
+          catch (ServiceException e)
+          {
+              System.Diagnostics.Debug.WriteLine(e.Message);
           }
 
-          var drive = await GraphService.GetGroupDriveAsync(graphClient, id);
-          details.DriveWebUrl = drive.WebUrl;
-          var driveItems = await GraphService.GetDriveRecentItemsAsync(graphClient, drive.Id);
+          System.Diagnostics.Debug.WriteLine(_msalLog.GetLog());
 
-          if (driveItems.Count == 1)
-          {
-            var graphDriveItem = driveItems[0];
-            var thumbnailUrl = await GraphService.GetDriveItemThumbnail(graphClient, drive.Id, graphDriveItem.Id);
-            var driveItem = new Models.DriveItem(graphDriveItem);
-            driveItem.ThumbnailUrl = thumbnailUrl;
-            details.DriveRecentItems.Add(driveItem);
-          }
-          if (driveItems.Count > 1)
-          {
-            foreach (var item in driveItems)
-            {
-              details.DriveRecentItems.Add(new Models.DriveItem(item));
-            }
-          }
+          return Json(details);
+      }
 
-          var convo = await GraphService.GetGroupLatestConversationAsync(graphClient, id);
-          details.LatestConversation = new Models.Conversation
+      private AdaptiveCard CreateGroupCard(Models.GroupModel group)
+      {
+          AdaptiveCard groupCard = new AdaptiveCard()
           {
-            Topic = convo.Topic,
-            LastDeliveredDateTime = convo.LastDeliveredDateTime,
+              Type = "AdaptiveCard",
+              Version = "1.0"
           };
-          details.LatestConversation.UniqueSenders.AddRange(convo.UniqueSenders);
-        }
 
-        details.InfoCard = CreateGroupCard(details);
-      }
-      catch (ServiceException e)
-      {
-        return Json(new { Message = "An unknown error has occurred." });
+          return groupCard;
       }
 
-      System.Diagnostics.Debug.WriteLine(_msalLog.GetLog());
-
-      return Json(details);
-    }
-
-    private AdaptiveCard CreateGroupCard(Models.GroupModel group)
-    {
-      AdaptiveCard groupCard = new AdaptiveCard()
+      private string NullSafeString(string value)
       {
-        Type = "AdaptiveCard",
-        Version = "1.0"
-      };
-
-      return groupCard
-    }
-
-    private string NullSafeString(string value)
-    {
-      return String.IsNullOrEmpty(value) ? "" : value;
-    }
+          return String.IsNullOrEmpty(value) ? "" : value;
+      }
 
   }
 }

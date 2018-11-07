@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Microsoft.Graph;
 using Microsoft.Extensions.Caching.Memory;
+using Microsoft.AspNetCore.Authentication;
 
 namespace GroupsReact.Controllers
 {
@@ -42,25 +43,37 @@ namespace GroupsReact.Controllers
           // Initialize the GraphServiceClient.
           var graphClient = _graphSdkHelper.GetAuthenticatedClient(identifier);
 
-          var userData = await GraphService.GetUserJson(graphClient, email, HttpContext);
-          var userObject = JsonConvert.DeserializeObject<User>(userData);
+          try
+          { 
+            var userData = await GraphService.GetUserJson(graphClient, email, HttpContext);
+            var userObject = JsonConvert.DeserializeObject<User>(userData);
 
-          userModel = new UserModel
-          {
-            Id = identifier,
-            Name = userObject.DisplayName,
-            Email = userObject.Mail
-          };
+            userModel = new UserModel
+            {
+              Id = identifier,
+              Name = userObject.DisplayName,
+              Email = userObject.Mail
+            };
 
-          var pic = await GraphService.GetPictureBase64(graphClient, email, HttpContext);
-          userModel.PictureBase64 = pic;
+            var pic = await GraphService.GetPictureBase64(graphClient, email, HttpContext);
+            userModel.PictureBase64 = pic;
 
-          // dont store an empty model
-          if (!string.IsNullOrEmpty(userModel.Name))
-          {
-            base.SaveUserModelInCache(userModel);
+            // dont store an empty model
+            if (!string.IsNullOrEmpty(userModel.Name))
+            {
+              base.SaveUserModelInCache(userModel);
+            }
           }
-
+          catch (ServiceException e)
+          {
+            switch (e.Error.Code)
+            {
+              case "Authorization_RequestDenied":
+                return new RedirectResult("/Account/PermissionsRequired");
+              default:
+                return new RedirectResult($"/Home/Error?msg={e.Error.Message}");
+            }
+          }
         }
 
         base.CopyUserModelToViewData(identifier);

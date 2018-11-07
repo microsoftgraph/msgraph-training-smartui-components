@@ -2,11 +2,11 @@
 
 In this demo, you will extend an ASP.NET Core application to use pickers provided by Office 365 services.
 
-### Register an application in Azure AD
+## Register an application in Azure AD
 
 To enable an application to call the Microsoft Graph, an application registration is required. This lab uses the [Azure Active Directory v2.0 endpoint](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-compare).
 
-1. Open a browser to the url **https://apps.dev.microsoft.com**
+1. Open a browser to the url **<https://apps.dev.microsoft.com>**
 1. Log in with a Work or School account.
 1. Select **Add an app**
 1. Complete the **Register your application** section, entering an Application name. Clear the checkbox for Guided Setup. Select **Create**
@@ -19,12 +19,12 @@ To enable an application to call the Microsoft Graph, an application registratio
 
 1. On the registration page, in the **Platforms** section, select **Add Platform**.
 1. In the **Add Platform** dialog, select **Web**.
-1. Enter a **Redirect URL** to the callback page file. For this lab, use the value `https://localhost:44313/OneDriveFilePickerCallback.html`
+1. Enter a **Redirect URL** to the callback page file. For this lab, use the value `https://localhost:44396/OneDriveFilePickerCallback.html`
 
 1. Select the **Add URL** button.
-1. Enter a **Redirect URL** for the implicit flow callback. For this lab, use the value `https://localhost:44313/signin-oidc'
+1. Enter a **Redirect URL** for the implicit flow callback. For this lab, use the value `https://localhost:44396/signin-oidc`
 1. Select the **Add URL** button again.
-1. Enter a **Redirect URL** for the admin consent callback. For this lab, use the value `https://localhost:44313/Account/Azure ADTenantConnected'
+1. Enter a **Redirect URL** for the admin consent callback. For this lab, use the value `https://localhost:44396/Account/AADTenantConnected`
 
     ![Screenshot of Platform section of the Application Registration Portal page](../../images/Exercise1-03.png)
 
@@ -91,7 +91,7 @@ The File picker requires a control for the user to invoke the picker, and a call
 1. Save and close the file.
 1. Open the file `Views\Picker\Index.cshtml`
 1. Notice that line 12 contains a button with a JavaScript handler for the select event.
-1. At the bottom of the page, at line 29, is a Razor section named **scripts**. Add the following tag inside the **scripts** section to load the File picker control.
+1. At the bottom of the page, approx line 33, is a Razor section named **scripts**. Add the following tag inside the **scripts** section to load the File picker control.
 
     ```javascript
     <script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
@@ -99,12 +99,10 @@ The File picker requires a control for the user to invoke the picker, and a call
 
 1. Add the following code after the `OneDrive.js` script tag. (The code is available in the `LabFiles\Pickers\OneDriveFilePicker.js` file):
 
-    > **NOTE:** In the script, there is a token called [your-client-id]. Replace this token with the client id of the application registered during the setup of this lab. This is the same id as used in the `appSettings.json` file.
-
     ```javascript
     <script type="text/javascript">
       function launchOneDrivePicker() {
-        var ClientID = "[your-client-id]";
+        var ClientID = "@Options.Value.ClientId";
 
         var odOptions = {
           clientId: ClientID,
@@ -112,7 +110,7 @@ The File picker requires a control for the user to invoke the picker, and a call
           multiSelect: false,
           advanced: {
             queryParameters: "select=id,name,size,file,folder,photo,@@microsoft.graph.downloadUrl",
-            redirectUri: 'https://localhost:44313/OneDriveFilePickerCallback.html'
+            redirectUri: '@Options.Value.BaseUrl/OneDriveFilePickerCallback.html'
           },
           success: function (files) {
             var data = files;
@@ -160,12 +158,20 @@ Office UI Fabric provides a People Picker component written in React. For detail
 1. Replace the contents of the template with the code from the file `LabFiles\Pickers\PeoplePicker.tsx`.
 1. Open the file `Views\Picker\Index.cshtml`
 1. Notice that line 25 contains a div with the id `react-peoplePicker`. This is the location in the page in which the control will be rendered.
-1. Inside the **scripts** section, add the following line:
+1. Inside the **scripts** section, add the following line right before the `</script>` tag:
 
     ```javascript
     App.RenderPeoplePicker();
     ```
+1. The `RenderPeoplePicker` method is defined in the `boot.tsx` file. Add the following code to that method:
 
-    > The `RenderPeoplePicker` method is defined in the `boot.tsx` file. The webpack configuration specifies that the TypeScript in the project is injected into pages as a library object named `App`.
+    ```javascript
+    ReactDOM.render(
+      <PeoplePicker></PeoplePicker>,
+      document.getElementById('react-peoplePicker')
+    );
+    ```
+
+    >Note: The webpack configuration specifies that the TypeScript in the project is injected into pages as a library object named `App`.
 
     ![Screenshot of Picker page with People Picker control](../../images/Exercise1-08.png)

@@ -346,3 +346,6 @@ typings/
 .env
 
 **.DS_Store
+
+.vscode/
+.vs/

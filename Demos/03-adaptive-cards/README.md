@@ -1,7 +1,8 @@
 # Demo - Using Adaptive Cards
 
-This demo will use an Adaptive Card to render Group information.
+This exercise will use an Adaptive Card to render Group information.
 
+1. If the Visual Studio debugger is running, stop it.
 1. Open the file `Controllers\GroupDataController.cs`
 1. Locate the `CreateGroupCard` method. It is currently a stub returning an empty card.
 1. Replace the contents of the `CreateGroupCard` method with the following. (The full **CreateGroupCard** method is in the file `LabFiles\Cards\Groups\CreateGroupCard.cs`).
@@ -9,94 +10,113 @@ This demo will use an Adaptive Card to render Group information.
     ```csharp
     private AdaptiveCard CreateGroupCard(Models.GroupModel group)
     {
-      AdaptiveCard groupCard = new AdaptiveCard()
-      {
-        Type = "AdaptiveCard",
-        Version = "1.0"
-      };
-
-      AdaptiveContainer infoContainer = new AdaptiveContainer();
-      AdaptiveColumnSet infoColSet = new AdaptiveColumnSet();
-
-      bool noPic = String.IsNullOrEmpty(group.Thumbnail);
-
-      if (!noPic)
-      {
-        AdaptiveColumn picCol = new AdaptiveColumn() { Width = AdaptiveColumnWidth.Auto };
-        picCol.Items.Add(new AdaptiveImage() { Url = new Uri(group.Thumbnail), Size = AdaptiveImageSize.Small, Style = AdaptiveImageStyle.Default });
-        infoColSet.Columns.Add(picCol);
-      }
-
-      AdaptiveColumn txtCol = new AdaptiveColumn() { Width = AdaptiveColumnWidth.Stretch };
-      var titleBlock = new AdaptiveTextBlock() { Text = NullSafeString(group.Name), Weight = AdaptiveTextWeight.Bolder };
-      if (noPic) { titleBlock.Size = AdaptiveTextSize.Large; }
-      txtCol.Items.Add(titleBlock);
-
-      txtCol.Items.Add(new AdaptiveTextBlock() { Text = NullSafeString(group.Description), Spacing = AdaptiveSpacing.None, IsSubtle = true });
-      infoColSet.Columns.Add(txtCol);
-      infoContainer.Items.Add(infoColSet);
-
-      groupCard.Body.Add(infoContainer);
-
-      AdaptiveContainer factContainer = new AdaptiveContainer();
-      AdaptiveFactSet factSet = new AdaptiveFactSet();
-
-      if (!String.IsNullOrEmpty(group.Classification))
-      {
-        factSet.Facts.Add(new AdaptiveFact()
+        AdaptiveCard groupCard = new AdaptiveCard()
         {
-          Title = "Classification",
-          Value = group.Classification
-        });
-      }
-      if (!String.IsNullOrEmpty(group.Visibility))
-      {
-        factSet.Facts.Add(new AdaptiveFact()
+            Type = "AdaptiveCard",
+            Version = "1.0"
+        };
+
+        AdaptiveContainer infoContainer = new AdaptiveContainer();
+        AdaptiveColumnSet infoColSet = new AdaptiveColumnSet();
+
+        bool noPic = String.IsNullOrEmpty(group.Thumbnail);
+
+        if (!noPic)
         {
-          Title = "Visibility",
-          Value = group.Visibility
-        });
-      }
+            AdaptiveColumn picCol = new AdaptiveColumn() {Width = AdaptiveColumnWidth.Auto};
+            picCol.Items.Add(new AdaptiveImage()
+            {
+                Url = new Uri(group.Thumbnail),
+                Size = AdaptiveImageSize.Small,
+                Style = AdaptiveImageStyle.Default
+            });
+            infoColSet.Columns.Add(picCol);
+        }
 
-      if (!String.IsNullOrEmpty(group.GroupType))
-      {
-        factSet.Facts.Add(new AdaptiveFact()
+        AdaptiveColumn txtCol = new AdaptiveColumn() {Width = AdaptiveColumnWidth.Stretch};
+        var titleBlock =
+            new AdaptiveTextBlock() {Text = NullSafeString(group.Name), Weight = AdaptiveTextWeight.Bolder};
+        if (noPic)
         {
-          Title = "Type",
-          Value = NullSafeString(group.GroupType)
-        });
-      }
+            titleBlock.Size = AdaptiveTextSize.Large;
+        }
 
-      if (group.CreatedDateTime.HasValue)
-      {
-        factSet.Facts.Add(new AdaptiveFact()
+        txtCol.Items.Add(titleBlock);
+
+        txtCol.Items.Add(new AdaptiveTextBlock()
         {
-          Title = "Created",
-          Value = $"{{{{DATE({group.CreatedDateTime.Value.UtcDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ")},SHORT)}}}}"
+            Text = NullSafeString(group.Description),
+            Spacing = AdaptiveSpacing.None,
+            IsSubtle = true
         });
+        infoColSet.Columns.Add(txtCol);
+        infoContainer.Items.Add(infoColSet);
 
-      }
+        groupCard.Body.Add(infoContainer);
 
-      if (!String.IsNullOrEmpty(group.Policy) && group.RenewedDateTime.HasValue)
-      {
+        AdaptiveContainer factContainer = new AdaptiveContainer();
+        AdaptiveFactSet factSet = new AdaptiveFactSet();
 
-        factSet.Facts.Add(new AdaptiveFact()
+        if (!String.IsNullOrEmpty(group.Classification))
         {
-          Title = "Policy",
-          Value = NullSafeString(group.Policy)
-        });
-        factSet.Facts.Add(new AdaptiveFact()
+            factSet.Facts.Add(new AdaptiveFact()
+            {
+                Title = "Classification",
+                Value = group.Classification
+            });
+        }
+
+        if (!String.IsNullOrEmpty(group.Visibility))
         {
-          Title = "Renewed",
-          Value = $"{{{{DATE({group.RenewedDateTime.Value.UtcDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ")},SHORT)}}}}"
-        });
-      }
+            factSet.Facts.Add(new AdaptiveFact()
+            {
+                Title = "Visibility",
+                Value = group.Visibility
+            });
+        }
 
-      factContainer.Items.Add(factSet);
-      groupCard.Body.Add(factContainer);
+        if (!String.IsNullOrEmpty(group.GroupType))
+        {
+            factSet.Facts.Add(new AdaptiveFact()
+            {
+                Title = "Type",
+                Value = NullSafeString(group.GroupType)
+            });
+        }
 
-      return groupCard;
+        if (group.CreatedDateTime.HasValue)
+        {
+            factSet.Facts.Add(new AdaptiveFact()
+            {
+                Title = "Created",
+                Value =
+                    $"{{{{DATE({group.CreatedDateTime.Value.UtcDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ")},SHORT)}}}}"
+            });
+
+        }
+
+        if (!String.IsNullOrEmpty(group.Policy) && group.RenewedDateTime.HasValue)
+        {
+
+            factSet.Facts.Add(new AdaptiveFact()
+            {
+                Title = "Policy",
+                Value = NullSafeString(group.Policy)
+            });
+            factSet.Facts.Add(new AdaptiveFact()
+            {
+                Title = "Renewed",
+                Value =
+                    $"{{{{DATE({group.RenewedDateTime.Value.UtcDateTime.ToString("yyyy-MM-ddTHH:mm:ssZ")},SHORT)}}}}"
+            });
+        }
+
+        factContainer.Items.Add(factSet);
+        groupCard.Body.Add(factContainer);
+
+        return groupCard;
     }
+
     ```
 
 1. In Solution Explorer, right-select on the **Components** folder and choose **Add > New Item...**
@@ -106,7 +126,7 @@ This demo will use an Adaptive Card to render Group information.
 1. Select the **TypeScript JSX File** template. Name file `GroupCard.tsx`.
 1. Replace the contents of the template with the following. (The complete code for the `GroupCard` class is in the file `LabFiles\Cards\Groups\GroupCard.tsx`.)
 
-    ```typescript
+    ```tsx
     import * as React from 'react';
     import * as AdaptiveCards from "adaptivecards";
     import { IGroupDetailsProps } from './GroupDetails';
@@ -157,7 +177,7 @@ This demo will use an Adaptive Card to render Group information.
 
 1. In the `render` method, locate the `return` statement. Modify the return statement to include the **GroupCard**.
 
-    ```typescript
+    ```tsx
     return (
       <div>
         <h2>Group Information</h2>

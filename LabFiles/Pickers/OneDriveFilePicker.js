@@ -1,5 +1,5 @@
 function launchOneDrivePicker() {
-  var ClientID = "your-client-id";
+  var ClientID = "@Options.Value.ClientId";
 
   var odOptions = {
     clientId: ClientID,
@@ -7,7 +7,7 @@ function launchOneDrivePicker() {
     multiSelect: false,
     advanced: {
       queryParameters: "select=id,name,size,file,folder,photo,@@microsoft.graph.downloadUrl",
-      redirectUri: 'https://localhost:44313/OneDriveFilePickerCallback.html'
+      redirectUri: '@Options.Value.BaseUrl/OneDriveFilePickerCallback.html'
     },
     success: function (files) {
       var data = files;
@@ -27,3 +27,6 @@ function launchOneDrivePicker() {
   };
   OneDrive.open(odOptions);
 }
+
+// PeoplePicker code
+App.RenderPeoplePicker();
