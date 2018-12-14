@@ -21,6 +21,7 @@ import { Group, IGroupListState, DriveItem } from './GroupList';
 import { Icon, IconType, IIconProps } from 'office-ui-fabric-react/lib/Icon';
 import { initializeFileTypeIcons, getFileTypeIconProps, FileIconType } from '@uifabric/file-type-icons';
 import { GlobalSettings } from 'office-ui-fabric-react/lib/Utilities';
+import Conversation = GroupList.Conversation;
 initializeFileTypeIcons();
 
 export interface IGroupDetailsProps {

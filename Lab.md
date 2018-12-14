@@ -105,6 +105,11 @@ To enable an application to call the Microsoft Graph, an application registratio
     "ClientId": "[your-client-id]",
     "ClientSecret": "[your-client-secret]",
     ```
+1. Verify in the project properties, debug settings that SSL is enabled and that the url matches the one that you entered as part of the redirect url in the app registration. The url should also match the BaseUrl specified in teh `appSettings.json` file.
+
+    ```json
+    "BaseUrl": "https://localhost:44352"
+    ```
 
 ### Provide administrative consent to application
 
@@ -138,7 +143,7 @@ The File picker requires a control for the user to invoke the picker, and a call
 
 1. Save and close the file.
 1. Open the file `Views\Picker\Index.cshtml`
-1. Notice that line 12 contains a button with a JavaScript handler for the select event.
+1. Notice that line 16 contains a button with a JavaScript handler for the select event.
 1. At the bottom of the page, approx line 33, is a Razor section named **scripts**. Add the following tag inside the **scripts** section to load the File picker control.
 
     ```javascript
@@ -205,13 +210,13 @@ Office UI Fabric provides a People Picker component written in React. For detail
 1. Select the **TypeScript JSX File** template. Name file `PeoplePicker.tsx`.
 1. Replace the contents of the template with the code from the file `LabFiles\Pickers\PeoplePicker.tsx`.
 1. Open the file `Views\Picker\Index.cshtml`
-1. Notice that line 25 contains a div with the id `react-peoplePicker`. This is the location in the page in which the control will be rendered.
+1. Notice that line 29 contains a div with the id `react-peoplePicker`. This is the location in the page in which the control will be rendered.
 1. Inside the **scripts** section, add the following line right before the `</script>` tag:
 
     ```javascript
     App.RenderPeoplePicker();
     ```
-1. The `RenderPeoplePicker` method is defined in the `boot.tsx` file. Add the following code to that method:
+1. The `RenderPeoplePicker` method is defined in the `Components\boot.tsx` file. Un-comment the import statement at the top of the file for the PeoplePicker and add the following code to that method:
 
     ```javascript
     ReactDOM.render(
@@ -319,6 +324,7 @@ In this step, add information about recent group activity using DocumentCards. T
     import { Icon, IconType, IIconProps } from 'office-ui-fabric-react/lib/Icon';
     import { initializeFileTypeIcons, getFileTypeIconProps, FileIconType } from '@uifabric/file-type-icons';
     import { GlobalSettings } from 'office-ui-fabric-react/lib/Utilities';
+    import Conversation = GroupList.Conversation;
     initializeFileTypeIcons();
     ```
 
@@ -355,8 +361,8 @@ In this step, add information about recent group activity using DocumentCards. T
     ```tsx
     return (
       <div>
-        <h2>{group.name}</h2>
-        { this.getMailboxActivity(group.latestConversation, group.mailboxWebUrl) }
+        <h2>{this.props.group.name}</h2>
+        { this.getMailboxActivity(this.props.group.latestConversation, this.props.group.mailboxWebUrl) }
       </div>
     );
     ```
@@ -369,7 +375,7 @@ In this step, add information about recent group activity using DocumentCards. T
 1. Return to Visual Studio. In the `GroupDetails` class, create the following method to render the most-recently updated documents in the Group library.
 
     ```tsx
-    private getLibraryActivity(driveRecentItems: DriveItem[], driveWebUrl: string): JSX.Element {
+    private getLibraryActivity(driveRecentItems: DriveItem[]): JSX.Element {
       if (driveRecentItems == null || driveRecentItems.length == 0) {
         return null;
       }
@@ -380,7 +386,8 @@ In this step, add information about recent group activity using DocumentCards. T
 
       let recentDocs: IDocumentCardPreviewProps = {
         getOverflowDocumentCountText: (overflowCount: number) => `+${overflowCount} more`,
-        previewImages: [ ]
+        previewImages: [
+        ]
       };
 
       let documentCardDocTitle: JSX.Element = null;
@@ -392,19 +399,27 @@ In this step, add information about recent group activity using DocumentCards. T
           name: doc.title,
           url: doc.webUrl,
           previewImageSrc: doc.thumbnailUrl,
-          iconSrc: globalSettings.icons[iconProps.iconName].code.props.src
+          iconSrc: globalSettings.icons[iconProps.iconName].code.props.src   // hack for file-type-icons
         };
         recentDocs.previewImages.push(previewImage);
         documentCardDocTitle = <DocumentCardTitle title={doc.title} shouldTruncate={true} />;
-      }
-      else {
+      } else {
         let docs = this.props.group.driveRecentItems;
         for (var i = 0; i < docs.length; i++) {
-          let iconProps: IIconProps = this.getIconProps((doc.fileType));
+          let iconProps: IIconProps = {};
+          switch (docs[i].fileType) {
+            case "folder":
+              iconProps = getFileTypeIconProps({ type: FileIconType.folder, size: 16 });
+              break;
+            default:
+              iconProps = getFileTypeIconProps({ extension: docs[i].fileType, size: 16 });
+              break;
+          }
+
           let previewImage: IDocumentCardPreviewImage = {
             name: docs[i].title,
             url: docs[i].webUrl,
-            iconSrc: globalSettings.icons[iconProps.iconName].code.props.src
+            iconSrc: globalSettings.icons[iconProps.iconName].code.props.src   // hack for file-type-icons
           };
           recentDocs.previewImages.push(previewImage);
         }
@@ -416,7 +431,7 @@ In this step, add information about recent group activity using DocumentCards. T
           <DocumentCardTitle title='Latest Documents' />
           <DocumentCardPreview previewImages={recentDocs.previewImages} getOverflowDocumentCountText={recentDocs.getOverflowDocumentCountText} />
           {documentCardDocTitle}
-          <DocumentCardLocation location='View Library' locationHref={driveWebUrl} />
+          <DocumentCardLocation location='View Library' locationHref={this.props.group.driveWebUrl} />
         </DocumentCard>
       );
 
@@ -425,6 +440,7 @@ In this step, add information about recent group activity using DocumentCards. T
 
     private getIconProps(fileSuffix: string): IIconProps {
       let iconProps: IIconProps = {};
+
       switch (fileSuffix) {
         case "folder":
           iconProps = getFileTypeIconProps({ type: FileIconType.folder, size: 16 });
@@ -443,23 +459,23 @@ In this step, add information about recent group activity using DocumentCards. T
     public render() {
       const group = this.props.group;
 
-      const libraryActivity: JSX.Element = this.getLibraryActivity(group.driveRecentItems, group.driveWebUrl);
-      const mailboxActivity: JSX.Element = this.getMailboxActivity(group.latestConversation, group.mailboxWebUrl);
+      const libraryActivity: JSX.Element = this.getLibraryActivity(this.props.group.driveRecentItems);
+      const mailboxActivity: JSX.Element = this.getMailboxActivity(this.props.group.latestConversation, this.props.group.mailboxWebUrl);
 
       const activity = (libraryActivity || mailboxActivity) ? (
-        <div>
-          <h2>Group Activity</h2>
-          {libraryActivity}
-          <br />
-          {mailboxActivity}
-        </div>
+          <div>
+              <h2>Group Activity</h2>
+              {libraryActivity}
+              <br />
+              {mailboxActivity}
+          </div>
       ) : (null);
 
       return (
-        <div>
-          <h2>{group.name}</h2>
-          { activity }
-        </div>
+          <div>
+              <h2>{group.name}</h2>
+              { activity }
+          </div>
       );
     }
     ```
