@@ -67,12 +67,12 @@ To enable an application to call the Microsoft Graph, an application registratio
 
 1. On the registration page, in the **Platforms** section, select **Add Platform**.
 1. In the **Add Platform** dialog, select **Web**.
-1. Enter a **Redirect URL** to the callback page file. For this lab, use the value `https://localhost:44396/OneDriveFilePickerCallback.html`
+1. Enter a **Redirect URL** to the callback page file. For this lab, use the value `https://localhost:44352/OneDriveFilePickerCallback.html`
 
 1. Select the **Add URL** button.
-1. Enter a **Redirect URL** for the implicit flow callback. For this lab, use the value `https://localhost:44396/signin-oidc`
+1. Enter a **Redirect URL** for the implicit flow callback. For this lab, use the value `https://localhost:44352/signin-oidc`
 1. Select the **Add URL** button again.
-1. Enter a **Redirect URL** for the admin consent callback. For this lab, use the value `https://localhost:44396/Account/AADTenantConnected`
+1. Enter a **Redirect URL** for the admin consent callback. For this lab, use the value `https://localhost:44352/Account/AADTenantConnected`
 
     ![Screenshot of Platform section of the Application Registration Portal page](./images/Exercise1-03.png)
 
@@ -105,7 +105,7 @@ To enable an application to call the Microsoft Graph, an application registratio
     "ClientId": "[your-client-id]",
     "ClientSecret": "[your-client-secret]",
     ```
-1. Verify in the project properties, debug settings that SSL is enabled and that the url matches the one that you entered as part of the redirect url in the app registration. The url should also match the BaseUrl specified in teh `appSettings.json` file.
+1. Verify in the project properties, debug settings that SSL is enabled and that the url matches the one that you entered as part of the redirect url in the app registration. The url should also match the BaseUrl specified in the `appSettings.json` file.
 
     ```json
     "BaseUrl": "https://localhost:44352"
