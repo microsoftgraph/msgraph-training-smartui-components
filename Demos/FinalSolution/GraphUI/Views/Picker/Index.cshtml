@@ -1,7 +1,6 @@
-﻿@using GroupsReact.Extensions
-@using Microsoft.AspNetCore.Http.Extensions
+﻿@using Microsoft.AspNetCore.Http.Extensions
+@using GroupsReact.Extensions
 @using Microsoft.Extensions.Options
-
 @inject IOptions<AzureAdOptions> Options
 
 @{
@@ -34,7 +33,6 @@
 @section scripts {
     <script type="text/javascript" src="https://js.live.net/v7.2/OneDrive.js"></script>
     <script type="text/javascript">
-
         function launchOneDrivePicker() {
             var ClientID = "@Options.Value.ClientId";
 
@@ -64,8 +62,6 @@
             };
             OneDrive.open(odOptions);
         }
-
-        // PeoplePicker code
         App.RenderPeoplePicker();
     </script>
 }

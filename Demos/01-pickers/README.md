@@ -2,7 +2,7 @@
 
 In this demo, you will extend an ASP.NET Core application to use pickers provided by Office 365 services.
 
-## Register an application in Azure AD
+### Register an application in Azure AD
 
 To enable an application to call the Microsoft Graph, an application registration is required. This lab uses the [Azure Active Directory v2.0 endpoint](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-compare).
 
@@ -19,12 +19,12 @@ To enable an application to call the Microsoft Graph, an application registratio
 
 1. On the registration page, in the **Platforms** section, select **Add Platform**.
 1. In the **Add Platform** dialog, select **Web**.
-1. Enter a **Redirect URL** to the callback page file. For this lab, use the value `https://localhost:44396/OneDriveFilePickerCallback.html`
+1. Enter a **Redirect URL** to the callback page file. For this lab, use the value `https://localhost:44352/OneDriveFilePickerCallback.html`
 
 1. Select the **Add URL** button.
-1. Enter a **Redirect URL** for the implicit flow callback. For this lab, use the value `https://localhost:44396/signin-oidc`
+1. Enter a **Redirect URL** for the implicit flow callback. For this lab, use the value `https://localhost:44352/signin-oidc`
 1. Select the **Add URL** button again.
-1. Enter a **Redirect URL** for the admin consent callback. For this lab, use the value `https://localhost:44396/Account/AADTenantConnected`
+1. Enter a **Redirect URL** for the admin consent callback. For this lab, use the value `https://localhost:44352/Account/AADTenantConnected`
 
     ![Screenshot of Platform section of the Application Registration Portal page](../../images/Exercise1-03.png)
 
@@ -56,6 +56,11 @@ To enable an application to call the Microsoft Graph, an application registratio
     "TenantId": "[your-tenant-id]",
     "ClientId": "[your-client-id]",
     "ClientSecret": "[your-client-secret]",
+    ```
+1. Verify in the project properties, debug settings that SSL is enabled and that the url matches the one that you entered as part of the redirect url in the app registration. The url should also match the BaseUrl specified in the `appSettings.json` file.
+
+    ```json
+    "BaseUrl": "https://localhost:44352"
     ```
 
 ### Provide administrative consent to application
@@ -90,7 +95,7 @@ The File picker requires a control for the user to invoke the picker, and a call
 
 1. Save and close the file.
 1. Open the file `Views\Picker\Index.cshtml`
-1. Notice that line 12 contains a button with a JavaScript handler for the select event.
+1. Notice that line 16 contains a button with a JavaScript handler for the select event.
 1. At the bottom of the page, approx line 33, is a Razor section named **scripts**. Add the following tag inside the **scripts** section to load the File picker control.
 
     ```javascript
@@ -157,13 +162,13 @@ Office UI Fabric provides a People Picker component written in React. For detail
 1. Select the **TypeScript JSX File** template. Name file `PeoplePicker.tsx`.
 1. Replace the contents of the template with the code from the file `LabFiles\Pickers\PeoplePicker.tsx`.
 1. Open the file `Views\Picker\Index.cshtml`
-1. Notice that line 25 contains a div with the id `react-peoplePicker`. This is the location in the page in which the control will be rendered.
+1. Notice that line 29 contains a div with the id `react-peoplePicker`. This is the location in the page in which the control will be rendered.
 1. Inside the **scripts** section, add the following line right before the `</script>` tag:
 
     ```javascript
     App.RenderPeoplePicker();
     ```
-1. The `RenderPeoplePicker` method is defined in the `boot.tsx` file. Add the following code to that method:
+1. The `RenderPeoplePicker` method is defined in the `Components\boot.tsx` file. Un-comment the import statement at the top of the file for the PeoplePicker and add the following code to that method:
 
     ```javascript
     ReactDOM.render(
@@ -175,3 +180,4 @@ Office UI Fabric provides a People Picker component written in React. For detail
     >Note: The webpack configuration specifies that the TypeScript in the project is injected into pages as a library object named `App`.
 
     ![Screenshot of Picker page with People Picker control](../../images/Exercise1-08.png)
+

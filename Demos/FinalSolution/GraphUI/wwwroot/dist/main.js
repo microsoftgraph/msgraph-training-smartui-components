@@ -60,7 +60,7 @@ var App =
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "ff2a514ea0a6a89dc54a"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "1000b9c1d8546e67dc78"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -11720,6 +11720,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 __webpack_require__(473);
 __webpack_require__(474);
 var GroupList_1 = __webpack_require__(459);
+//import { GroupDetails } from './GroupDetails';
 var PeoplePicker_1 = __webpack_require__(461);
 var Icons_1 = __webpack_require__(344);
 Icons_1.initializeIcons();
@@ -11737,10 +11738,12 @@ function renderNavMenu() {
 }
 exports.renderNavMenu = renderNavMenu;
 function RenderGroupList() {
+    //Group list render function goes here
     ReactDOM.render(React.createElement(GroupList_1.GroupList, null), document.getElementById('react-groupList'));
 }
 exports.RenderGroupList = RenderGroupList;
 function RenderPeoplePicker() {
+    //People picker render function goes here
     ReactDOM.render(React.createElement(PeoplePicker_1.PeoplePicker, null), document.getElementById('react-peoplePicker'));
 }
 exports.RenderPeoplePicker = RenderPeoplePicker;
@@ -11750,7 +11753,7 @@ if (true) {
 }
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\codeDemos\\graphui\\GraphUI\\Components\\boot.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\codeDemos\\graphui\\GraphUI\\Components\\boot.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\labs\\StarterProject\\GraphUI\\Components\\boot.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\labs\\StarterProject\\GraphUI\\Components\\boot.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
@@ -35567,13 +35570,7 @@ var GroupCard = (function (_super) {
         // Host Config defines the style and behavior of a card
         adaptiveCard.hostConfig = new AdaptiveCards.HostConfig({
             fontFamily: "Segoe UI, Helvetica Neue, sans-serif"
-            // More host config options
         });
-        // For markdown support you need a third-party library
-        // E.g., to use markdown-it, include in your HTML page:
-        //     <script type="text/javascript" src="https://unpkg.com/markdown-it/dist/markdown-it.js"></script>
-        // And add this code to replace the default markdown handler:
-        //     AdaptiveCards.processMarkdown = function(text) { return markdownit().render(text); }
         // Parse the card payload
         adaptiveCard.parse(card);
         // Render the card to an HTML element:
@@ -35585,7 +35582,7 @@ var GroupCard = (function (_super) {
 exports.GroupCard = GroupCard;
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\codeDemos\\graphui\\GraphUI\\Components\\GroupCard.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\codeDemos\\graphui\\GraphUI\\Components\\GroupCard.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\labs\\StarterProject\\GraphUI\\Components\\GroupCard.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\labs\\StarterProject\\GraphUI\\Components\\GroupCard.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
@@ -35608,14 +35605,14 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(2);
 var DocumentCard_1 = __webpack_require__(342);
 var file_type_icons_1 = __webpack_require__(162);
-file_type_icons_1.initializeFileTypeIcons();
 var GroupCard_1 = __webpack_require__(457);
+file_type_icons_1.initializeFileTypeIcons();
 var GroupDetails = (function (_super) {
     __extends(GroupDetails, _super);
     function GroupDetails(props) {
         return _super.call(this, props) || this;
     }
-    GroupDetails.prototype.getLibraryActivity = function (driveRecentItems, driveWebUrl) {
+    GroupDetails.prototype.getLibraryActivity = function (driveRecentItems) {
         if (driveRecentItems == null || driveRecentItems.length == 0) {
             return null;
         }
@@ -35641,7 +35638,15 @@ var GroupDetails = (function (_super) {
         else {
             var docs = this.props.group.driveRecentItems;
             for (var i = 0; i < docs.length; i++) {
-                var iconProps = this.getIconProps((docs[i].fileType));
+                var iconProps = {};
+                switch (docs[i].fileType) {
+                    case "folder":
+                        iconProps = file_type_icons_1.getFileTypeIconProps({ type: 2 /* folder */, size: 16 });
+                        break;
+                    default:
+                        iconProps = file_type_icons_1.getFileTypeIconProps({ extension: docs[i].fileType, size: 16 });
+                        break;
+                }
                 var previewImage = {
                     name: docs[i].title,
                     url: docs[i].webUrl,
@@ -35655,7 +35660,7 @@ var GroupDetails = (function (_super) {
             React.createElement(DocumentCard_1.DocumentCardTitle, { title: 'Latest Documents' }),
             React.createElement(DocumentCard_1.DocumentCardPreview, { previewImages: recentDocs.previewImages, getOverflowDocumentCountText: recentDocs.getOverflowDocumentCountText }),
             documentCardDocTitle,
-            React.createElement(DocumentCard_1.DocumentCardLocation, { location: 'View Library', locationHref: driveWebUrl })));
+            React.createElement(DocumentCard_1.DocumentCardLocation, { location: 'View Library', locationHref: this.props.group.driveWebUrl })));
         return libraryActivity;
     };
     GroupDetails.prototype.getIconProps = function (fileSuffix) {
@@ -35689,8 +35694,8 @@ var GroupDetails = (function (_super) {
     };
     GroupDetails.prototype.render = function () {
         var group = this.props.group;
-        var libraryActivity = this.getLibraryActivity(group.driveRecentItems, group.driveWebUrl);
-        var mailboxActivity = this.getMailboxActivity(group.latestConversation, group.mailboxWebUrl);
+        var libraryActivity = this.getLibraryActivity(this.props.group.driveRecentItems);
+        var mailboxActivity = this.getMailboxActivity(this.props.group.latestConversation, this.props.group.mailboxWebUrl);
         var activity = (libraryActivity || mailboxActivity) ? (React.createElement("div", null,
             React.createElement("h2", null, "Group Activity"),
             libraryActivity,
@@ -35707,7 +35712,7 @@ var GroupDetails = (function (_super) {
 exports.GroupDetails = GroupDetails;
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\codeDemos\\graphui\\GraphUI\\Components\\GroupDetails.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\codeDemos\\graphui\\GraphUI\\Components\\GroupDetails.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\labs\\StarterProject\\GraphUI\\Components\\GroupDetails.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\labs\\StarterProject\\GraphUI\\Components\\GroupDetails.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
@@ -35883,7 +35888,7 @@ var GroupList = (function (_super) {
 exports.GroupList = GroupList;
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\codeDemos\\graphui\\GraphUI\\Components\\GroupList.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\codeDemos\\graphui\\GraphUI\\Components\\GroupList.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\labs\\StarterProject\\GraphUI\\Components\\GroupList.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\labs\\StarterProject\\GraphUI\\Components\\GroupList.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
@@ -35924,7 +35929,7 @@ var NavMenu = (function (_super) {
 exports.NavMenu = NavMenu;
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\codeDemos\\graphui\\GraphUI\\Components\\NavMenu.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\codeDemos\\graphui\\GraphUI\\Components\\NavMenu.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\labs\\StarterProject\\GraphUI\\Components\\NavMenu.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\labs\\StarterProject\\GraphUI\\Components\\NavMenu.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
@@ -36130,7 +36135,7 @@ var PeoplePicker = (function (_super) {
 exports.PeoplePicker = PeoplePicker;
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\codeDemos\\graphui\\GraphUI\\Components\\PeoplePicker.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\codeDemos\\graphui\\GraphUI\\Components\\PeoplePicker.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\labs\\StarterProject\\GraphUI\\Components\\PeoplePicker.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\labs\\StarterProject\\GraphUI\\Components\\PeoplePicker.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
@@ -36547,7 +36552,7 @@ exports.people = [
 exports.mru = exports.people.slice(0, 5);
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\codeDemos\\graphui\\GraphUI\\Components\\PeoplePickerExampleData.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\codeDemos\\graphui\\GraphUI\\Components\\PeoplePickerExampleData.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\labs\\StarterProject\\GraphUI\\Components\\PeoplePickerExampleData.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\labs\\StarterProject\\GraphUI\\Components\\PeoplePickerExampleData.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
@@ -36568,9 +36573,9 @@ var __extends = (this && this.__extends) || (function () {
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
 var React = __webpack_require__(2);
-var Persona_1 = __webpack_require__(26);
 var styling_1 = __webpack_require__(4);
 __webpack_require__(470);
+var Persona_1 = __webpack_require__(26);
 var Banner = (function (_super) {
     __extends(Banner, _super);
     function Banner(props) {
@@ -36613,7 +36618,7 @@ var Banner = (function (_super) {
 exports.Banner = Banner;
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\codeDemos\\graphui\\GraphUI\\Components\\banner.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\codeDemos\\graphui\\GraphUI\\Components\\banner.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\labs\\StarterProject\\GraphUI\\Components\\banner.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\labs\\StarterProject\\GraphUI\\Components\\banner.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
