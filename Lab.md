@@ -105,6 +105,7 @@ To enable an application to call the Microsoft Graph, an application registratio
     "ClientId": "[your-client-id]",
     "ClientSecret": "[your-client-secret]",
     ```
+
 1. Verify in the project properties, debug settings that SSL is enabled and that the url matches the one that you entered as part of the redirect url in the app registration. The url should also match the BaseUrl specified in the `appSettings.json` file.
 
     ```json
@@ -216,6 +217,7 @@ Office UI Fabric provides a People Picker component written in React. For detail
     ```javascript
     App.RenderPeoplePicker();
     ```
+
 1. The `RenderPeoplePicker` method is defined in the `Components\boot.tsx` file. Un-comment the import statement at the top of the file for the PeoplePicker and add the following code to that method:
 
     ```javascript
