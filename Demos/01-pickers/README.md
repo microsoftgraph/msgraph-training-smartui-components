@@ -2,7 +2,7 @@
 
 In this demo, you will extend an ASP.NET Core application to use pickers provided by Office 365 services.
 
-### Register an application in Azure AD
+## Register an application in Azure AD
 
 To enable an application to call the Microsoft Graph, an application registration is required. This lab uses the [Azure Active Directory v2.0 endpoint](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-compare).
 
@@ -45,7 +45,7 @@ To enable an application to call the Microsoft Graph, an application registratio
 
 1. Select **Save**.
 
-### Update application configuration
+## Update application configuration
 
 1. Open the starter application. The started application is a Visual Studio solution that can be found at `LabFiles\StarterProject\GraphUI.sln`.
 1. Open the `appSettings.json` file.
@@ -57,13 +57,14 @@ To enable an application to call the Microsoft Graph, an application registratio
     "ClientId": "[your-client-id]",
     "ClientSecret": "[your-client-secret]",
     ```
+
 1. Verify in the project properties, debug settings that SSL is enabled and that the url matches the one that you entered as part of the redirect url in the app registration. The url should also match the BaseUrl specified in the `appSettings.json` file.
 
     ```json
     "BaseUrl": "https://localhost:44352"
     ```
 
-### Provide administrative consent to application
+## Provide administrative consent to application
 
 1. Press F5 to run the application.
 1. When prompted, log in with your Work or School account and grant consent to the application.
@@ -73,7 +74,7 @@ To enable an application to call the Microsoft Graph, an application registratio
 1. The app will then display the Home page.
 1. Stop debugging
 
-### Add the OneDrive File Picker
+## Add the OneDrive File Picker
 
 OneDrive provides File pickers for Android and JavaScript. This lab uses the JavaScript version. Additional information is available on the [reference page](https://docs.microsoft.com/en-us/onedrive/developer/controls/file-pickers/js-v72/).
 
@@ -151,7 +152,7 @@ The File picker requires a control for the user to invoke the picker, and a call
 
     ![Screenshot of Picker page of the application, including data return from the OneDrive File Picker](../../images/Exercise1-07.png)
 
-### Add the Office UI Fabric People Picker
+## Add the Office UI Fabric People Picker
 
 Office UI Fabric provides a People Picker component written in React. For detailed information about the components, refer to the [Office UI Fabric documentation](http://dev.office.com/fabric). The starter project in the lab is pre-configured to use React, following the principles of the [create-react-app utility](https://reactjs.org/docs/add-react-to-a-new-app.html#create-react-app). In the lab, you will extend the application to use the [sample people picker from Office UI Fabric](https://developer.microsoft.com/en-us/fabric#/components/peoplepicker).
 
@@ -168,6 +169,7 @@ Office UI Fabric provides a People Picker component written in React. For detail
     ```javascript
     App.RenderPeoplePicker();
     ```
+
 1. The `RenderPeoplePicker` method is defined in the `Components\boot.tsx` file. Un-comment the import statement at the top of the file for the PeoplePicker and add the following code to that method:
 
     ```javascript
@@ -180,4 +182,3 @@ Office UI Fabric provides a People Picker component written in React. For detail
     >Note: The webpack configuration specifies that the TypeScript in the project is injected into pages as a library object named `App`.
 
     ![Screenshot of Picker page with People Picker control](../../images/Exercise1-08.png)
-

@@ -37,7 +37,7 @@
 
 
   <ItemGroup>
-    <PackageReference Include="AdaptiveCards" Version="1.1.0" />
+    <PackageReference Include="AdaptiveCards" Version="1.1.2" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.2.0" />
     <PackageReference Include="Microsoft.Graph" Version="1.12.0" />
     <PackageReference Include="microsoft.identity.client" Version="1.1.4-preview0002" />
