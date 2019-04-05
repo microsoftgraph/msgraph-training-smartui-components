@@ -54,44 +54,47 @@ In this exercise, you will extend an ASP.NET Core application to use pickers pro
 
 To enable an application to call the Microsoft Graph, an application registration is required. This lab uses the [Azure Active Directory v2.0 endpoint](https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-compare).
 
-1. Open a browser to the url **<https://apps.dev.microsoft.com>**
-1. Log in with a Work or School account.
-1. Select **Add an app**
-1. Complete the **Register your application** section, entering an Application name. Clear the checkbox for Guided Setup. Select **Create**
+1. Open a browser and navigate to the [Azure Active Directory admin center](https://aad.portal.azure.com). Login using a **personal account** (aka: Microsoft Account) or **Work or School Account**.
 
-    ![Screenshot of Application Registration Portal page](./images/Exercise1-01.png)
+1. Select **Azure Active Directory** in the left-hand navigation, then select **App registrations (Preview)** under **Manage**.
 
-1. On the registration page, in the **Application Secrets** section, select **Generate New Password**. Copy the generated password for future use.
+1. Select **New registration**. On the **Register an application** page, set the values as follows.
 
-    ![Screenshot of Application Secrets section of the Application Registration Portal page](./images/Exercise1-02.png)
+    - Set **Name** to `Graph Smart UI Lab`.
+    - Set **Supported account types** to **Accounts in any organizational directory and personal Microsoft accounts**.
+    - Under **Redirect URI**, set the first drop-down to `Web` and set the value to `https://localhost:44395/signin-oidc`.
 
-1. On the registration page, in the **Platforms** section, select **Add Platform**.
-1. In the **Add Platform** dialog, select **Web**.
-1. Enter a **Redirect URL** to the callback page file. For this lab, use the value `https://localhost:44352/OneDriveFilePickerCallback.html`
+    ![A screenshot of the Register an application page](./images/aad-register-an-app.png)
 
-1. Select the **Add URL** button.
-1. Enter a **Redirect URL** for the implicit flow callback. For this lab, use the value `https://localhost:44352/signin-oidc`
-1. Select the **Add URL** button again.
-1. Enter a **Redirect URL** for the admin consent callback. For this lab, use the value `https://localhost:44352/Account/AADTenantConnected`
+1. Choose **Register**. On the **Graph Smart UI Lab** page, copy the value of the **Application (client) ID** and the **Directory (tenant) ID** and save them, you will need them in the next steps.
 
-    ![Screenshot of Platform section of the Application Registration Portal page](./images/Exercise1-03.png)
+    ![A screenshot of the application ID of the new app registration](./images/aad-application-id.png)
 
-1. Select **Save**.
-1. Make note of the Application Id. This value is used in the authentication / token code.
-1. Scroll down to the **Microsoft Graph Permissions** section.
-1. Next to **Delegated Permissions**, select the **Add** button.
-1. In the **Select Permission** dialog, scroll down and select the following Scopes:
+1. Select **Authentication** under **Manage**. In the **Redirect URIs** section, add 2 more redirect URIs with the following values:
+
+    - **Type**: `Web`, **Redirect URI**: `https://localhost:44395/OneDriveFilePickerCallback.html`
+    - **Type**: `Web`, **Redirect URI**: `https://localhost:44395/Account/AADTenantConnected`
+
+    ![A screenshot of the Redirect URIs page](./images/aad-redirect-uris.png)
+
+1. In the **Advanced settings** section, locate **Implicit grant** and enable **Access tokens** and **ID tokens**, then choose **Save**.
+
+    ![A screenshot of the Implicit grant section](./images/aad-implicit-grant.png)
+
+1. Select **Certificates & secrets** under **Manage**. Select the **New client secret** button. Enter a value in **Description** and select one of the options for **Expires** and choose **Add**.
+
+1. Copy the client secret value before you leave this page. You will need it in the next step.
+
+    > **Important:** This client secret is never shown again, so make sure you copy it now.
+
+1. Select **API permissions** under **Manage**. Choose **Add a permission**.
+1. Select **Microsoft Graph**, then **Delegated permissions**.
+1. In the **Select permissions** section, scroll down and select the following permissions:
     1. **Directory.Read.All**
-    1. **email**
     1. **Group.Read.All**
-    1. **offline_access**
-    1. **openid**
-    1. **profile**
-1. Select **OK**.
+1. Select **Add permissions**.
 
-    ![Screenshot of Microsoft Graph Permissions section of the Application Registration Portal page](./images/Exercise1-04.png)
-
-1. Select **Save**.
+    ![Screenshot of Microsoft Graph Permissions section of the Application Registration Portal page](./images/aad-add-graph-permissions.png)
 
 ### Update application configuration
 
@@ -109,7 +112,7 @@ To enable an application to call the Microsoft Graph, an application registratio
 1. Verify in the project properties, debug settings that SSL is enabled and that the url matches the one that you entered as part of the redirect url in the app registration. The url should also match the BaseUrl specified in the `appSettings.json` file.
 
     ```json
-    "BaseUrl": "https://localhost:44352"
+    "BaseUrl": "https://localhost:44395"
     ```
 
 ### Provide administrative consent to application
