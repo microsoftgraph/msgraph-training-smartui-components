@@ -60,7 +60,7 @@ var App =
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "1b57b284c7d57faf29cb"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "2b009e7999ffab6f4cd8"; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
 /******/ 	var hotCurrentParents = []; // eslint-disable-line no-unused-vars
@@ -12552,7 +12552,7 @@ if (true) {
 }
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\FinalSolution\\GraphUI\\Components\\boot.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\FinalSolution\\GraphUI\\Components\\boot.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\CompletedSolution\\GraphUI\\Components\\boot.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\CompletedSolution\\GraphUI\\Components\\boot.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
@@ -37594,7 +37594,7 @@ var GroupCard = /** @class */ (function (_super) {
 exports.GroupCard = GroupCard;
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\FinalSolution\\GraphUI\\Components\\GroupCard.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\FinalSolution\\GraphUI\\Components\\GroupCard.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\CompletedSolution\\GraphUI\\Components\\GroupCard.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\CompletedSolution\\GraphUI\\Components\\GroupCard.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
@@ -37724,7 +37724,7 @@ var GroupDetails = /** @class */ (function (_super) {
 exports.GroupDetails = GroupDetails;
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\FinalSolution\\GraphUI\\Components\\GroupDetails.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\FinalSolution\\GraphUI\\Components\\GroupDetails.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\CompletedSolution\\GraphUI\\Components\\GroupDetails.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\CompletedSolution\\GraphUI\\Components\\GroupDetails.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
@@ -37900,7 +37900,7 @@ var GroupList = /** @class */ (function (_super) {
 exports.GroupList = GroupList;
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\FinalSolution\\GraphUI\\Components\\GroupList.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\FinalSolution\\GraphUI\\Components\\GroupList.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\CompletedSolution\\GraphUI\\Components\\GroupList.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\CompletedSolution\\GraphUI\\Components\\GroupList.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
@@ -37941,7 +37941,7 @@ var NavMenu = /** @class */ (function (_super) {
 exports.NavMenu = NavMenu;
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\FinalSolution\\GraphUI\\Components\\NavMenu.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\FinalSolution\\GraphUI\\Components\\NavMenu.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\CompletedSolution\\GraphUI\\Components\\NavMenu.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\CompletedSolution\\GraphUI\\Components\\NavMenu.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
@@ -38147,7 +38147,7 @@ var PeoplePicker = /** @class */ (function (_super) {
 exports.PeoplePicker = PeoplePicker;
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\FinalSolution\\GraphUI\\Components\\PeoplePicker.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\FinalSolution\\GraphUI\\Components\\PeoplePicker.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\CompletedSolution\\GraphUI\\Components\\PeoplePicker.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\CompletedSolution\\GraphUI\\Components\\PeoplePicker.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
@@ -38564,7 +38564,7 @@ exports.people = [
 exports.mru = exports.people.slice(0, 5);
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\FinalSolution\\GraphUI\\Components\\PeoplePickerExampleData.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\FinalSolution\\GraphUI\\Components\\PeoplePickerExampleData.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\CompletedSolution\\GraphUI\\Components\\PeoplePickerExampleData.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\CompletedSolution\\GraphUI\\Components\\PeoplePickerExampleData.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
@@ -38630,7 +38630,7 @@ var Banner = /** @class */ (function (_super) {
 exports.Banner = Banner;
 
 
- ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\FinalSolution\\GraphUI\\Components\\banner.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\FinalSolution\\GraphUI\\Components\\banner.tsx"); } } })();
+ ;(function register() { /* react-hot-loader/webpack */ if (process.env.NODE_ENV !== 'production') { if (typeof __REACT_HOT_LOADER__ === 'undefined') { return; } if (typeof module.exports === 'function') { __REACT_HOT_LOADER__.register(module.exports, 'module.exports', "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\CompletedSolution\\GraphUI\\Components\\banner.tsx"); return; } for (var key in module.exports) { if (!Object.prototype.hasOwnProperty.call(module.exports, key)) { continue; } var namedExport = void 0; try { namedExport = module.exports[key]; } catch (err) { continue; } __REACT_HOT_LOADER__.register(namedExport, key, "C:\\Source\\Repos\\msgraph-training-smartui-components\\Demos\\CompletedSolution\\GraphUI\\Components\\banner.tsx"); } } })();
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(5)))
 
 /***/ }),
