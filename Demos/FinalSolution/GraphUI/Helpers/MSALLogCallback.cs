@@ -14,7 +14,7 @@ namespace GroupsReact.Helpers
       return result;
     }
 
-    public void Log(Logger.LogLevel level, string message, bool containsPii)
+    public void Log(LogLevel level, string message, bool containsPii)
     {
       if (!containsPii)
       {
