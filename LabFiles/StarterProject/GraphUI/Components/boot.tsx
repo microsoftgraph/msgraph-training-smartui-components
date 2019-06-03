@@ -1,4 +1,9 @@
-﻿// add an export line for each component. This forces webpack to pick them all up.
+﻿/* 
+*  Copyright (c) Microsoft. All rights reserved. Licensed under the MIT license. 
+*  See LICENSE in the source repository root for complete license information. 
+*/
+
+// add an export line for each component. This forces webpack to pick them all up.
 import './site.css';
 import 'office-ui-fabric-react/dist/css/fabric.css';
 import { GroupList, Group, IGroupListState } from './GroupList';
