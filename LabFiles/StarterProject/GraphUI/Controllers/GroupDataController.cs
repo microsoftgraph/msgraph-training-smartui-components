@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AdaptiveCards;
 using GroupsReact.Helpers;
@@ -28,7 +29,7 @@ namespace GroupsReact.Controllers
     public async Task<ActionResult> Photo(string id, string userId)
     {
       // Initialize the GraphServiceClient.
-      var graphClient = _graphSdkHelper.GetAuthenticatedClient(userId);
+      var graphClient = _graphSdkHelper.GetAuthenticatedClient((ClaimsIdentity)User.Identity);
 
       string pic = default(string);
       try
@@ -50,7 +51,7 @@ namespace GroupsReact.Controllers
       public async Task<ActionResult> Details(string id, string userId)
       {
           // Initialize the GraphServiceClient.
-          var graphClient = _graphSdkHelper.GetAuthenticatedClient(userId);
+          var graphClient = _graphSdkHelper.GetAuthenticatedClient((ClaimsIdentity)User.Identity);
 
           GroupModel details = null;
           try

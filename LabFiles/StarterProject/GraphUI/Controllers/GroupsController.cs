@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using GroupsReact.Helpers;
 using GroupsReact.Models;
@@ -29,11 +30,11 @@ namespace GroupsReact.Controllers
       List<GroupListItemViewModel> data = new List<GroupListItemViewModel>();
 
       // Get user's id for token cache.
-      var identifier = User.FindFirst(GraphAuthProvider.ObjectIdentifierType)?.Value;
+      var identifier = User.FindFirst(Startup.ObjectIdentifierType)?.Value;
       base.CopyUserModelToViewData(identifier);
 
       // Initialize the GraphServiceClient.
-      var graphClient = _graphSdkHelper.GetAuthenticatedClient(identifier);
+      var graphClient = _graphSdkHelper.GetAuthenticatedClient((ClaimsIdentity)User.Identity);
 
       try
       {

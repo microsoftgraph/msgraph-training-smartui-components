@@ -81,7 +81,7 @@ namespace GroupsReact.Controllers
     public ActionResult PermissionsRequired(string error)
     {
       // Get user's id for token cache.
-      var identifier = User.FindFirst(GraphAuthProvider.ObjectIdentifierType)?.Value;
+      var identifier = User.FindFirst(Startup.ObjectIdentifierType)?.Value;
       base.CopyUserModelToViewData(identifier);
 
       ViewBag.Error = error;

@@ -28,12 +28,14 @@ namespace GroupsReact.Extensions
     private class ConfigureAzureOptions : IConfigureNamedOptions<OpenIdConnectOptions>
     {
       private readonly AzureAdOptions _azureOptions;
+      private readonly IGraphAuthProvider _authProvider;
 
       public AzureAdOptions GetAzureAdOptions() => _azureOptions;
-
-      public ConfigureAzureOptions(IOptions<AzureAdOptions> azureOptions)
+      
+      public ConfigureAzureOptions(IOptions<AzureAdOptions> azureOptions, IGraphAuthProvider authProvider)
       {
         _azureOptions = azureOptions.Value;
+        _authProvider = authProvider;
       }
 
       public void Configure(string name, OpenIdConnectOptions options)
@@ -51,6 +53,8 @@ namespace GroupsReact.Extensions
 
         options.TokenValidationParameters = new TokenValidationParameters
         {
+          NameClaimType = "name",
+
           // Instead of using the default validation (validating against a single issuer value, as we do in line of business apps),
           // we inject our own multitenant validation logic
           ValidateIssuer = false,
@@ -96,22 +100,22 @@ namespace GroupsReact.Extensions
           OnAuthorizationCodeReceived = async (context) =>
           {
             var code = context.ProtocolMessage.Code;
-            var identifier = context.Principal.FindFirst(GraphAuthProvider.ObjectIdentifierType).Value;
-            var memoryCache = context.HttpContext.RequestServices.GetRequiredService<IMemoryCache>();
-            var graphScopes = _azureOptions.GraphScopes.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-            var redirectUri = _azureOptions.BaseUrl + _azureOptions.CallbackPath;
+            var identifier = context.Principal.FindFirst(Startup.ObjectIdentifierType).Value;
+            //var memoryCache = context.HttpContext.RequestServices.GetRequiredService<IMemoryCache>();
+            //var graphScopes = _azureOptions.GraphScopes.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+            //var redirectUri = _azureOptions.BaseUrl + _azureOptions.CallbackPath;
 
-            var cca = new ConfidentialClientApplication(
-                _azureOptions.ClientId,
-                redirectUri,
-                new ClientCredential(_azureOptions.ClientSecret),
-                new InMemoryTokenCache(identifier, memoryCache).GetCacheInstance(),
-                null);
-            var result = await cca.AcquireTokenByAuthorizationCodeAsync(code, graphScopes);
+            //var cca = new ConfidentialClientApplication(
+            //    _azureOptions.ClientId,
+            //    redirectUri,
+            //    new ClientCredential(_azureOptions.ClientSecret),
+            //    new InMemoryTokenCache(identifier, memoryCache).GetCacheInstance(),
+            //    null);
+            var result = await _authProvider.GetUserAccessTokenByAuthorizationCode(code);
 
             // Check whether the login is from the MSA tenant. 
             // The sample uses this attribute to disable UI buttons for unsupported operations when the user is logged in with an MSA account.
-            var currentTenantId = context.Principal.FindFirst(GraphAuthProvider.TenantIdType).Value;
+            var currentTenantId = context.Principal.FindFirst(Startup.TenantIdType).Value;
             if (currentTenantId == "9188040d-6c67-4c5b-b112-36a304b66dad")
             {
               // MSA (Microsoft Account) is used to log in

@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Microsoft.Graph;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.AspNetCore.Authentication;
+using System.Security.Claims;
 
 namespace GroupsReact.Controllers
 {
@@ -31,7 +32,7 @@ namespace GroupsReact.Controllers
       if (User.Identity.IsAuthenticated)
       {
         // Get user's id for token cache.
-        var identifier = User.FindFirst(GraphAuthProvider.ObjectIdentifierType)?.Value;
+        var identifier = User.FindFirst(Startup.ObjectIdentifierType)?.Value;
 
         userModel = base.GetUserModelFromCache(identifier);
 
@@ -41,7 +42,7 @@ namespace GroupsReact.Controllers
           email = email ?? User.Identity.Name ?? User.FindFirst("preferred_username").Value;
 
           // Initialize the GraphServiceClient.
-          var graphClient = _graphSdkHelper.GetAuthenticatedClient(identifier);
+          var graphClient = _graphSdkHelper.GetAuthenticatedClient((ClaimsIdentity)User.Identity);
 
           try
           { 
