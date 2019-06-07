@@ -17,21 +17,11 @@ namespace GroupsReact.Helpers
 {
   public class GraphAuthProvider : IGraphAuthProvider
   {
-    //public const string ObjectIdentifierType = "http://schemas.microsoft.com/identity/claims/objectidentifier";
-    //public const string TenantIdType = "http://schemas.microsoft.com/identity/claims/tenantid";
     public const string AdminConsentFormat = "https://login.microsoftonline.com/{0}/adminconsent?client_id={1}&state={2}&redirect_uri={3}";
 
-
-    //private readonly IMemoryCache _memoryCache;
-    //private TokenCache _userTokenCache;
-
-    // Properties used to get and manage an access token.
-    //private readonly string _appId;
     private readonly IConfidentialClientApplication _app;
     private readonly string[] _scopes;
-    //private readonly string _redirectUri;
 
-    //public GraphAuthProvider(IMemoryCache memoryCache, IOptions<AzureAdOptions> options)  //IConfiguration configuration
     public GraphAuthProvider(IConfiguration configuration)
     {
       var azureOptions = new AzureAdOptions();
@@ -44,28 +34,12 @@ namespace GroupsReact.Helpers
           .Build();
 
       _scopes = azureOptions.GraphScopes.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-
-      //_appId = azureOptions.ClientId;
-      //_credential = new ClientCredential(azureOptions.ClientSecret);
-      //_scopes = azureOptions.GraphScopes.Split(new[] { ' ' });
-      //_redirectUri = azureOptions.BaseUrl;// + azureOptions.CallbackPath;
-
-      //_memoryCache = memoryCache;
     }
 
     // Gets an access token. First tries to get the access token from the token cache.
     // Using password (secret) to authenticate. Production apps should use a certificate.
     public async Task<string> GetUserAccessTokenAsync(string userId)
     {
-      //_userTokenCache = new InMemoryTokenCache(userId, _memoryCache).GetCacheInstance();
-
-      //var cca = new ConfidentialClientApplication(
-      //    _appId,
-      //    _redirectUri,
-      //    _credential,
-      //    _userTokenCache,
-      //    null);
-
       var account = await _app.GetAccountAsync(userId);
       if (account == null) throw new ServiceException(new Error
       {
