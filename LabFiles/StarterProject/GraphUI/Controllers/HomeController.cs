@@ -44,7 +44,7 @@ namespace GroupsReact.Controllers
         if (userModel == null)
         {
           // Get users's email.
-          email = email ?? User.Identity.Name ?? User.FindFirst("preferred_username").Value;
+          email = email ?? User.FindFirst("preferred_username").Value;
 
           // Initialize the GraphServiceClient.
           var graphClient = _graphSdkHelper.GetAuthenticatedClient((ClaimsIdentity)User.Identity);
