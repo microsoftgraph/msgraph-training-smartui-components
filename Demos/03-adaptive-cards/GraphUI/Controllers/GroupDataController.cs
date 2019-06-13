@@ -157,10 +157,9 @@ namespace GroupsReact.Controllers
 
       private AdaptiveCard CreateGroupCard(Models.GroupModel group)
       {
-          AdaptiveCard groupCard = new AdaptiveCard()
+          AdaptiveCard groupCard = new AdaptiveCard("1.0")
           {
-              Type = "AdaptiveCard",
-              Version = "1.0"
+              Type = "AdaptiveCard"
           };
 
           AdaptiveContainer infoContainer = new AdaptiveContainer();
