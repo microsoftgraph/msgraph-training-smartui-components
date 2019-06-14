@@ -2,14 +2,14 @@
 
 This exercise will add various cards from Office UI Fabric to the application. The application reads Group information and should be run as the tenant administrator.
 
-## Add Persona card to banner
+### Add Persona card to banner
 
-The application has a banner at the top of each page. In this step, add a Persona card to the banner showing the current logged-in user. The complete `Banner` class can be found in the file `LabFiles\Cards\Banner.tsx` file.
+The application has a banner at the top of each page. In this step, add a Persona card to the banner showing the current logged-in user. The complete **Banner** class can be found in the file **LabFiles\Cards\Banner.tsx** file.
 
-1. In Visual Studio, open the file `Components\banner.tsx'.
+1. In Visual Studio, open the file **Components\banner.tsx**.
 1. At the top of the file, add the following import statement:
 
-    ```typescript
+    ```tsx
     import {
       Persona,
       PersonaInitialsColor,
@@ -19,9 +19,9 @@ The application has a banner at the top of each page. In this step, add a Person
     } from 'office-ui-fabric-react/lib/Persona';
     ```
 
-1. In the `banner.tsx` file, locate the `Banner` class. The class has a constructor and a method named `render`. Add the following as a new method in the `Banner` class.
+1. In the **banner.tsx** file, locate the `Banner` class. The class has a constructor and a method named `render()`. Add the following as a new method in the `Banner` class.
 
-    ```typescript
+    ```tsx
     private getPersonaStyles(props: IPersonaStyleProps): Partial<IPersonaStyles> {
       return {
         root: {
@@ -41,9 +41,9 @@ The application has a banner at the top of each page. In this step, add a Person
     }
     ```
 
-1. The name and picture of the current user are written to the page in the `_Layouts.cshtml` file. Add the following to `banner.tsx` to create a Persona component with that information. This statement should be the first line of the `render` method, replacing the existing definition of the persona variable.
+1. The name and picture of the current user are written to the page in the **_Layouts.cshtml** file. Add the following to **banner.tsx** to create a Persona component with that information. This statement should be the first line of the `render()` method, replacing the existing definition of the persona variable.
 
-    ```typescript
+    ```tsx
     const persona = (this.props.name) ? (
       <Persona
         size={PersonaSize.size40}
@@ -57,9 +57,9 @@ The application has a banner at the top of each page. In this step, add a Person
     );
     ```
 
-1. Save all files and press F5 to run the project. After login, the home page will show the current user at the top right of the screen.
+1. Save all files and press <kbd>F5</kbd> to run the project. After login, the home page will show the current user at the top right of the screen.
 
-  ![Screenshot of application home page with Persona card in banner](../../images/Exercise2-01.png)
+    ![Screenshot of application home page with Persona card in banner](./../../images/Exercise2-01.png)
 
 ### Add Cards to Groups detail component
 
@@ -67,14 +67,14 @@ The application has a page to display all Office 365 groups in the tenant. Selec
 
 1. With the project still running, select the **Groups** link in the left-hand navigation. From the list of Groups, select on a group to open the details pane.
 
-    ![Screenshot of the application Groups page with the detail pane displayed](../../images/Exercise2-02.png)
+    ![Screenshot of the application Groups page with the detail pane displayed](./../../images/Exercise2-02.png)
 
-In this step, add information about recent group activity using DocumentCards. The complete set of cards for the Group page can be found in the `LabFiles\Cards\GroupDetails.tsx` file.
+In this step, add information about recent group activity using DocumentCards. The complete set of cards for the Group page can be found in the **LabFiles\Cards\GroupDetails.tsx** file.
 
-1. In Visual Studio, open the file `Components\GroupDetails.tsx'.
+1. In Visual Studio, open the file **Components\GroupDetails.tsx**.
 1. At the top of the file, add the following imports:
 
-    ```typescript
+    ```tsx
     import {
       DocumentCard,
       DocumentCardActions,
@@ -93,6 +93,7 @@ In this step, add information about recent group activity using DocumentCards. T
     import { Icon, IconType, IIconProps } from 'office-ui-fabric-react/lib/Icon';
     import { initializeFileTypeIcons, getFileTypeIconProps, FileIconType } from '@uifabric/file-type-icons';
     import { GlobalSettings } from 'office-ui-fabric-react/lib/Utilities';
+    import GroupList = require("./GroupList");
     import Conversation = GroupList.Conversation;
     initializeFileTypeIcons();
     ```
@@ -125,7 +126,7 @@ In this step, add information about recent group activity using DocumentCards. T
     }
     ```
 
-1. In the `render` method of the `GroupDetails` class, replace the `return` statement with the following:
+1. In the `render()` method of the `GroupDetails` class, replace the `return` statement with the following:
 
     ```tsx
     return (
@@ -139,7 +140,7 @@ In this step, add information about recent group activity using DocumentCards. T
 1. Save the file.
 1. Refresh the Groups page and select on a group. The detail panel will include details about the latest conversation.
 
-    ![Screenshot of the application group page with the detail pane open, showing the latest conversation](../../images/Exercise2-03.png)
+    ![Screenshot of the application group page with the detail pane open, showing the latest conversation](./../../images/Exercise2-03.png)
 
 1. Return to Visual Studio. In the `GroupDetails` class, create the following method to render the most-recently updated documents in the Group library.
 
@@ -222,7 +223,7 @@ In this step, add information about recent group activity using DocumentCards. T
     }
     ```
 
-1. Replace the `render` method with the following.
+1. Replace the `render()` method with the following.
 
     ```tsx
     public render() {
@@ -252,4 +253,4 @@ In this step, add information about recent group activity using DocumentCards. T
 1. Save the file.
 1. Refresh the Groups page and select on a group. The detail panel will include details about the latest documents in the group library (if any).
 
-    ![Screenshot of the application group page with the detail pane open, showing the latest documents and the latest conversation](../../images/Exercise2-04.png)
+    ![Screenshot of the application group page with the detail pane open, showing the latest documents and the latest conversation](./../../images/Exercise2-04.png)

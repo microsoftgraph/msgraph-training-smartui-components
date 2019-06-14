@@ -1,11 +1,11 @@
 # Demo - Using Adaptive Cards
 
-This exercise will use an Adaptive Card to render Group information.
+This demo will use an Adaptive Card to render Group information.
 
 1. If the Visual Studio debugger is running, stop it.
-1. Open the file `Controllers\GroupDataController.cs`
-1. Locate the `CreateGroupCard` method. It is currently a stub returning an empty card.
-1. Replace the contents of the `CreateGroupCard` method with the following. (The full **CreateGroupCard** method is in the file `LabFiles\Cards\Groups\CreateGroupCard.cs`).
+1. Open the file **Controllers\GroupDataController.cs**.
+1. Locate the `CreateGroupCard()` method. It is currently a stub returning an empty card.
+1. Replace the contents of the `CreateGroupCard` method with the following. (_The full `CreateGroupCard()` method is in the file **LabFiles\Cards\Groups\CreateGroupCard.cs**._).
 
     ```csharp
     private AdaptiveCard CreateGroupCard(Models.GroupModel group)
@@ -116,15 +116,14 @@ This exercise will use an Adaptive Card to render Group information.
 
         return groupCard;
     }
-
     ```
 
 1. In Solution Explorer, right-select on the **Components** folder and choose **Add > New Item...**
-1. Select the **SCSS Style Sheet (SASS)** template. Name file `GroupCard.scss`.
-1. Replace the contents of the template with the code from the file `LabFiles\Cards\Groups\GroupCard.scss`.
+1. Select the **SCSS Style Sheet (SASS)** template. Name file **GroupCard.scss**.
+1. Replace the contents of the template with the code from the file **LabFiles\Cards\Groups\GroupCard.scss**.
 1. In Solution Explorer, right-select on the **Components** folder and choose **Add > New Item...**
-1. Select the **TypeScript JSX File** template. Name file `GroupCard.tsx`.
-1. Replace the contents of the template with the following. (The complete code for the `GroupCard` class is in the file `LabFiles\Cards\Groups\GroupCard.tsx`.)
+1. Select the **TypeScript JSX File** template. Name file **GroupCard.tsx**.
+1. Replace the contents of the template with the following. (The complete code for the `GroupCard` class is in the file **LabFiles\Cards\Groups\GroupCard.tsx**.)
 
     ```tsx
     import * as React from 'react';
@@ -168,10 +167,10 @@ This exercise will use an Adaptive Card to render Group information.
     }
     ```
 
-1. Open the file `Components\GroupDetails.tsx`
+1. Open the file **Components\GroupDetails.tsx**
 1. At the top of the file, add the following import statement.
 
-    ```typescript
+    ```tsx
     import { GroupCard } from './GroupCard';
     ```
 
@@ -190,6 +189,6 @@ This exercise will use an Adaptive Card to render Group information.
     ```
 
 1. Save all files.
-1. Press F5 to run the application. Navigate to the Groups page and select on a group. The detail panel will include details about group in addition to the activity.
+1. Press <kbd>F5</kbd> to run the application. Navigate to the Groups page and select on a group. The detail panel will include details about group in addition to the activity.
 
-    ![Screenshot of the application group page with the detail pane open, showing the group information](../../images/Exercise3-01.png)
+    ![Screenshot of the application group page with the detail pane open, showing the group information](./../../images/Exercise3-01.png)

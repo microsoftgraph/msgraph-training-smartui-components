@@ -1,0 +1,13 @@
+﻿
+@{
+  ViewData["Title"] = "PermissionsRequired";
+}
+
+<h2>Connect Your AAD Tenant</h2>
+<h4>In order to begin listing groups from your company, an admin needs to grant permissions to the Graph UI App.</h4>
+<p class="ms-fontColor-alert">@ViewBag.Error</p>
+
+<a asp-area="" asp-controller="Account" asp-action="ConnectAADTenant">Connect your tenant</a>
+@section scripts {
+
+}
