@@ -1,5 +1,9 @@
 # Microsoft Graph Training Module - Smart UI with Microsoft Graph, Pickers and Cards
 
+## IMPORTANT
+
+**This sample has been archived and is no longer being maintained. For a more current sample using Microsoft Graph with smart UI components, please see https://docs.microsoft.com/graph/toolkit/overview.**
+
 This module will show you how to build a web user interface with Office UI Fabric components and invoking Office 365 pickers for interacting with data from the Microsoft Graph.
 
 ## Lab - Smart UI with Microsoft Graph, Pickers and Cards
